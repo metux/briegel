@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for i in $* ; do
+    echo "ADDING PATH: $i"
+    mkdir -p $i
+    PREPEND_INCLUDE="$PREPEND_INCLUDE --prepend-include=$i"
+    shift;
+done
+
+autoreconf -v -fi $PREPEND_INCLUDE
