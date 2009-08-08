@@ -1,0 +1,17 @@
+
+if [ ! "${BRIEGEL_CONFDIR}" ]; then
+    echo "$0: missing BRIEGEL_CONFDIR"
+    exit 123
+fi
+
+briegel_get_pkg_features() {
+    local package="$1"
+    cat ${BRIEGEL_CONFDIR}/packages/${package}/features.db | grep -e "^feature:" | sed -e 's~^feature:~~; s~^[\t ]*~~'
+}
+
+briegel_get_target_port_cf() {
+    local target="$1"
+    local port="$2"
+    local var="$3"
+    ${BRIEGEL_CONFDIR}/targets/${target}/scripts/cf-query --port "${port}" "${var}"
+}

@@ -12,3 +12,8 @@ gcj/cmd.install_port
 gcj/cmd.setup_sysroot
 gcj/libjbriegel.so
 jbriegel/.build
+porcelain/bin/briegel-create-target
+porcelain/bin/briegel-pkg-config-fixup
+porcelain/lib/briegel/confdb.sh
+porcelain/lib/briegel/massbuild.sh
+porcelain/lib/briegel/target-commands.sh

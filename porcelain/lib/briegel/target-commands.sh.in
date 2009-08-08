@@ -1,0 +1,60 @@
+#
+# Porcelain target commands main multiplexer
+#
+
+export BRIEGEL_DEFAULT_JVM="@BRIEGEL_DEFAULT_JVM@"
+export BRIEGEL_DEFAULT_ROOT="@BRIEGEL_DEFAULT_ROOT@"
+
+if [ ! "$BRIEGEL_TARGET" ]; then 
+    echo "$0: missing BRIEGEL_TARGET";
+    exit 1;
+fi
+
+if [ ! "$BRIEGEL_JVM" ]; then
+    export BRIEGEL_JVM=$BRIEGEL_DEFAULT_JVM
+fi
+
+if [ ! "$BRIEGEL_PREFIX" ]; then
+    export BRIEGEL_PREFIX="$BRIEGEL_DEFAULT_ROOT"
+fi
+
+if [ ! "$BRIEGEL_CONFDIR" ]; then
+    export BRIEGEL_CONFDIR="$BRIEGEL_PREFIX/etc/briegel"
+fi
+
+if [ ! "$BRIEGEL_CONF" ]; then
+    export BRIEGEL_CONF="$BRIEGEL_CONFDIR/targets/$BRIEGEL_TARGET/etc/briegel/briegel.conf"
+fi
+
+export CLASSPATH="$CLASSPATH:@JAR_RT_JBRIEGEL@:@JMETUX_CLASSPATH@:@UNITOOL_CLASSPATH@"
+
+case "$BRIEGEL_COMMAND" in
+    setup-sysroot)
+	$BRIEGEL_JVM org.de.metux.briegel.cmd.setup_sysroot "$*"
+    ;;
+    fetch-source)
+	$BRIEGEL_JVM org.de.metux.briegel.cmd.fetch_source "$*"
+    ;;
+    install-port)
+	$BRIEGEL_JVM org.de.metux.briegel.cmd.install_port "$*"
+    ;;
+    create-package)
+	$BRIEGEL_JVM org.de.metux.briegel.cmd.build "$*"
+    ;;
+    create-image)
+	$BRIEGEL_JVM org.de.metux.briegel.cmd.create_image "$*"
+    ;;
+    check-update)
+	$BRIEGEL_JVM org.de.metux.briegel.cmd.check_update "$*"
+    ;;
+    build-all)
+	$BRIEGEL_JVM org.de.metux.briegel.cmd.buildall "$*"
+    ;;
+    cf-query)
+	$BRIEGEL_JVM org.de.metux.briegel.cmd.cf_query $@
+    ;;
+    *)
+	echo "$0: unsupported command \"$BRIEGEL_COMMAND\"" >&2
+	exit 1
+    ;;
+esac
