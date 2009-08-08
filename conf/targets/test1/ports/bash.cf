@@ -1,0 +1,34 @@
+@package:	bash
+@version:	4.0.0.999
+
+feature-enable=alias:			off
+feature-enable=brace-expansion:		off
+feature-enable=arith-for-command:	off
+feature-enable=array-variables:		off
+feature-enable=command-timing:		off
+feature-enable=conditional-command:	off
+feature-enable=conditional-regexp:	off
+feature-enable=debugger:		off
+feature-enable=directory-stack:		off
+feature-enable=extended-glob:		off
+feature-enable=help-builtin:		off
+feature-enable=history:			off
+feature-enable=job-control:		off
+feature-enable=multibyte-characters:	off
+feature-enable=dparen-arithmetic:	off
+feature-enable=net-redirections:	off
+feature-enable=process-substitution:	off
+feature-enable=programmable-completion:	off
+feature-enable=readline:		off	## breaks ?
+feature-enable=prompt-string-decoding:	off
+feature-enable=restricted:		off
+feature-enable=select:			off
+feature-enable=separate-helpfiles:	off
+feature-enable=single-help-strings:	off
+feature-enable=strict-posix-default:	off
+feature-enable=xpg-echo-default:	off
+feature-enable=memory-scramble:		off
+feature-enable=profiling:		off
+feature-enable=largefile:		off
+feature-enable=static-link:		off
+feature-enable=nls:			off

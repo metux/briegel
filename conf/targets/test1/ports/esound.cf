@@ -1,0 +1,9 @@
+@package:			esound
+@version:			0.2.41.1
+
+feature-enable=oss:		on
+feature-enable=ipv6:		off
+feature-enable=alsa:		on
+feature-enable=arts:		off
+feature-enable=tcp-wrapper:	off
+feature-enable=local-sound:	on

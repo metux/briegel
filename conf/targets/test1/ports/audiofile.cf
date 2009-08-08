@@ -1,0 +1,7 @@
+@package:			audiofile
+@version:			0.2.7.3
+
+feature-enable=largefile:	off
+feature-enable=tools:		on
+feature-enable=old-pkgconfig:	on
+feature-enable=examples:	off

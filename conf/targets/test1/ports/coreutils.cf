@@ -1,0 +1,11 @@
+@package:	coreutils
+#@version:	8.5.0.1
+@version:	8.5.0.999
+
+feature-enable=largefile:	off
+feature-enable=threads:		off
+feature-enable=acl:		off
+feature-enable=libcap:		off
+feature-enable=xattr:		off
+feature-enable=assert:		off
+feature-enable=rpath:		off
