@@ -1,0 +1,16 @@
+feature:	tools
+on:		--enable-tools
+off:		--disable-tools
+--
+feature:	old-pkgconfig
+on:		--enable-old-pkgconfig
+off:		--disable-old-pkgconfig
+--
+feature:	examples
+on:		--enable-examples
+off:		--disable-examples
+--
+feature:	largefile
+on:		--enable-largefile
+off:		--disable-largefile
+--
