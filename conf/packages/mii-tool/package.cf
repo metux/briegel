@@ -1,0 +1,4 @@
+@style:					class/gmake4
+@style:					source/oss-qm-git-2
+gmake-build-workdir:			./
+warn-missing-available-versions:	off
