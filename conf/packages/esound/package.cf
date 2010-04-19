@@ -1,0 +1,7 @@
+@style:					class/autotools-2-features
+@style:					source/oss-qm-git-2
+warn-missing-available-versions:	off
+#autoconf-build-workdir:			./
+require-build:				audiofile
+
+autoconf-package-opts:			--disable-arts

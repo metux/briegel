@@ -1,0 +1,25 @@
+feature:	tcp-wrapper
+on:		--with-libwrap
+--
+feature:	ipv6
+on:		--enable-ipv6
+off:		--disable-ipv6
+--
+feature:	local-sound
+on:		--enable-local-sound
+off:		--disable-local-sound
+--
+feature:	oss
+on:		--enable-oss
+off:		--disable-oss
+--
+feature:	alsa
+on:		--enable-alsa
+off:		--disable-alsa
+--
+# Not supported yet
+#feature:		arts
+#on:			--enable-arts
+#off:			--disable-arts
+#on=require-build:	arts
+#--
