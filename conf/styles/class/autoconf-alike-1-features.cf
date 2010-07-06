@@ -1,0 +1,3 @@
+@style:			class/autoconf-alike-1
+feature-db:		$(@@package-db-dir)/features.db
+++feature-addvar:	ac-opts require-build
