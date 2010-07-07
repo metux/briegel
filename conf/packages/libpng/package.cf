@@ -1,0 +1,6 @@
+@style:			class/autotools-2
+@style:			source/oss-qm-git-2
+
+autoconf-build-workdir:	./
+feature-defvar:		_none
+require-build:		zlib
