@@ -1,0 +1,16 @@
+## autoconf standard path arguments
+$(autoconf-path-args)
+
+## crosscompile options
+$(autoconf-cross-args)
+
+## feature options
+$(autoconf-feature-opts)
+
+## package-defined options
+$(autoconf-package-opts)
+
+## port-defined options
+$(autoconf-port-opts)
+
+BRIEGEL_PKG_CLASS=autoconf-2

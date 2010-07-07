@@ -1,0 +1,4 @@
+@style:			class/autotools-2
+feature-db:		$(@@package-db-dir)/features.db
+feature-defvar:		autoconf-feature-opts
+++feature-addvar:	require-build
