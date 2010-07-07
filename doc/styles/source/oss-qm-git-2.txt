@@ -1,0 +1,11 @@
+Style: source/oss-qm-git-2
+
+This style fetches the source from the git-based OSS-QM source repository
+(http://pubgit.metux.de/...) on the package name and version and vendor tag.
+
+Properties:
+
+    * $(oss-qm-vendor):		vendor name,	default: "METUX"
+    * $(oss-qm-pkg):		package name,	default: "$(source-package)"
+    * $(oss-qm-version):	version numner,	default: "$(package-version)"
+    * $(oss-qm-urlprefix):	URL prefix,	default: "http://pubgit.metux.de/download/oss-qm/$(oss-qm-pkg)"
