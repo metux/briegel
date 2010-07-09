@@ -1,0 +1,6 @@
+@style:				class/autotools-2-features
+@style:				source/oss-qm-git-2
+feature-defvar:			foo
+#install-strip:			yes
+require-build:			gnulib-src
+autoconf-exec-createconf:	cd $(@@srcdir) && /bin/bash ./bootstrap --gnulib-srcdir=$(@@system-root)/usr/share/gnulib-src/

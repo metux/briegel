@@ -1,0 +1,26 @@
+feature:	threads
+off:		--disable-threads
+--
+feature:	acl
+on:		--enable-acl
+off:		--disable-acl
+--
+feature:	assert
+on:		--enable-assert
+off:		--disable-assert
+--
+feature:	largefile
+on:		--enable-largefile
+off:		--disable-largefile
+--
+feature:	xattr
+on:		--enable-xattr
+off:		--disable-xattr
+--
+feature:	libcap
+on:		--enable-libcap
+off:		--disable-libcap
+--
+feature:	rpath
+off:		--disable-rpath
+--
