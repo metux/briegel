@@ -1,0 +1,4 @@
+@style:					source/oss-qm-git-2
+@style:					class/autotools-2-features
+package-install-bindir:			$(fhs-sys-bindir)
+warn-missing-available-versions:	on

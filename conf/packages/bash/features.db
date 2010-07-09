@@ -1,0 +1,153 @@
+feature:	alias
+on:		--enable-alias
+off:		--disable-alias
+--
+feature:	brace-expansion
+on:		--enable-brace-expansion
+off:		--disable-brace-expansion
+id:		braceexp
+--
+feature:	arith-for-command
+on:		--enable-arith-for-command
+off:		--disable-arith-for-command
+id:		arith4cmd
+--
+feature:	array-variables
+on:		--enable-array-variables
+off:		--disable-array-variables
+id:		arrays
+--
+feature:	command-timing
+on:		--enable-command-timing
+off:		--disable-command-timing
+id:		cmdtime
+--
+feature:	conditional-command
+on:		--enable-cond-command
+off:		--disable-cond-command
+id:		cndcmd
+--
+feature:	conditional-regexp
+on:		--enable-cond-regexp
+off:		--disable-cond-regexp
+id:		cndre
+--
+feature:	debugger
+on:		--enable-debugger
+off:		--disable-debugger
+id:		dbg
+--
+feature:	directory-stack
+on:		--enable-directory-stack
+off:		--disable-directory-stack
+id:		dirstack
+--
+feature:	extended-glob
+on:		--enable-extended-glob
+off:		--disable-extended-glob
+id:		extglob
+--
+feature:	help-builtin
+on:		--enable-help-builtin
+off:		--disable-help-builtin
+id:		hlpin
+--
+feature:	history
+on:		--enable-history
+off:		--disable-history
+id:		hist
+--
+feature:	job-control
+on:		--enable-job-control
+off:		--disable-job-control
+id:		jobctrl
+--
+feature:	multibyte-characters
+on:		--enable-multibyte
+off:		--disable-multibyte
+id:		mb
+--
+feature:	dparen-arithmetic
+on:		--enable-dparen-arithmetic
+off:		--disable-dparen-arithmetic
+id:		dparenarith
+--
+feature:	net-redirections
+on:		--enable-net-redirections
+off:		--disable-net-redirections
+id:		netredir
+--
+feature:	process-substitution
+on:		--enable-process-substitution
+off:		--disable-process-substitution
+id:		procsubst
+--
+feature:	programmable-completion
+on:		--enable-progcomp
+off:		--disable-progcomp
+id:		prgcmpl
+--
+feature:	prompt-string-decoding
+on:		--enable-prompt-string-decoding
+off:		--disable-prompt-string-decoding
+id:		prompt
+--
+feature:	readline
+id:		rl
+on:		--enable-readline
+off:		--disable-readline
+on=require-build:	readline
+--
+feature:	restricted
+on:		--enable-restricted
+off:		--disable-restricted
+id:		restr
+--
+feature:	select
+on:		--enable-select
+off:		--disable-select
+--
+feature:	separate-helpfiles
+on:		--enable-separate-helpfiles
+off:		--disable-separate-helpfiles
+id:		sephlp
+--
+feature:	single-help-strings
+on:		--enable-single-help-strings
+off:		--disable-single-help-strings
+id:		1hlpstr
+--
+feature:	strict-posix-default
+on:		--enable-strict-posix-default
+off:		--disable-strict-posix-default
+id:		strictposix
+--
+feature:	xpg-echo-default
+on:		--enable-xpg-echo-default
+off:		--disable-xpg-echo-default
+id:		xpgecho
+--
+feature:	memory-scramble
+on:		--enable-memory-scramble
+off:		--disable-memory-scramble
+id:		mscr
+--
+feature:	profiling
+on:		--enable-profiling
+off:		--disable-profiling
+id:		prof
+--
+feature:	largefile
+on:		--enable-largefile
+off:		--disable-largefile
+id:		lf
+--
+feature:	static-link
+on:		--enable-static-link
+off:		--disable-static-link
+id:		static
+--
+feature:	nls
+on:		--enable-nls
+off:		--disable-nls
+--
