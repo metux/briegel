@@ -1,0 +1,55 @@
+## fhs style directories -- MUST BE SET! ##
+## these settings are DEFAULTS -- packages shoud NOT overwrite them ##
+## adjust package-xxx instead ##
+
+fhs-prefix:				/usr/
+fhs-sysconfdir:				/etc/
+fhs-localstatedir:			/var/
+fhs-sys-bindir:				/bin/
+fhs-sys-sbindir:			/sbin/
+fhs-sys-libdir:				/lib/
+fhs-libdir:				$(fhs-prefix)lib/
+fhs-datadir:				$(fhs-prefix)share/
+fhs-aclocal:				$(fhs-datadir)aclocal/
+fhs-mandir:				$(fhs-datadir)man/
+fhs-infodir:				$(fhs-datadir)info/
+fhs-pkgconfig:				$(fhs-libdir)/pkgconfig/
+fhs-libexecdir:				$(fhs-prefix)libexec/
+fhs-x11-prefix:				$(fhs-prefix)/X11/
+fhs-x11-libdir:				$(fhs-x11-prefix)/lib/
+fhs-x11-bindir:				$(fhs-x11-prefix)/bin/
+fhs-x11-pkgconfig:			$(fhs-x11-libdir)/pkgconfig/
+fhs-x11-includedir:			$(fhs-x11-prefix)/include/
+fhs-x11-datadir:			$(fhs-x11-prefix)/share/
+fhs-x11-aclocal:			$(fhs-x11-datadir)/aclocal/
+
+## these variables may be (partially) overwritte by some packages/ports,
+## i.e. if multiple versions should be put into different prefixes
+package-install-prefix:			$(fhs-prefix)
+package-install-confdir:		$(fhs-sysconfdir)
+package-install-sysconfdir:		$(fhs-sysconfdir)
+package-install-localstatedir:		$(fhs-localstatedir)
+package-install-sys-bindir:		$(fhs-sys-bindir)
+package-install-sys-sbindir:		$(fhs-sys-sbindir)
+package-install-sys-libdir:		$(fhs-sys-libdir)
+package-install-datadir:		$(package-install-prefix)/share
+package-install-mandir:			$(package-install-datadir)/man
+package-install-infodir:		$(package-install-datadir)/info
+package-install-bindir:			$(package-install-prefix)/bin
+package-install-sbindir:		$(package-install-prefix)/sbin
+package-install-libdir:			$(package-install-prefix)/lib
+package-install-includedir:		$(package-install-prefix)/include
+package-install-sharedstatedir:		$(package-install-prefix)/com
+package-install-libexecdir:		$(package-install-prefix)/libexec
+
+## FIXME !!!
+package-install-x11-prefix:		$(package-install-prefix)/X11
+package-install-x11-libdir:		$(package-install-x11-prefix)/lib
+package-install-x11-includedir:		$(package-install-x11-prefix)/include
+package-install-x11-bindir:		$(package-install-x11-prefix)/bin
+package-install-x11-sbindir:		$(package-install-x11-prefix)/sbin
+package-install-x11-mandir:		$(package-install-x11-prefix)/share/man
+package-install-x11-infodir:		$(package-install-x11-prefix)/share/info
+package-install-x11-libexecdir:		$(package-install-x11-prefix)/libexec
+package-install-x11-localstatedir:	$(package-install-localstatedir)/X11
+package-install-x11-sysconfdir:		$(package-install-sysconfdir)/X11

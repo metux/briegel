@@ -1,0 +1,17 @@
+#!/bin/bash
+for i in $@ ; do
+    PARAM="$PARAM -B$i"
+done
+echo "AUTORECONF PARAM: $PARAM"
+autoreconf -fi -Wall $PARAM
+
+VERSION_LINE=`cat ltmain.sh | grep "VERSION="`
+
+rm ltmain.sh
+
+echo "Installing external libtool template"
+(
+    echo "# calling external libtool (ie unitool's drop-in replacement)"
+    echo "$VERSION_LINE"
+    echo "exec \$EXTERNAL_LIBTOOL \"\$@\""
+) > ltmain.sh

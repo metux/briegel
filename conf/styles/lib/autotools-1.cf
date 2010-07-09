@@ -1,0 +1,11 @@
+##
+## this style defines evrything neccessary regenerating autotools files 
+##
+aclocal-x11-dir:		$(@@system-root)/$(fhs-x11-aclocal)
+aclocal-dir:			$(@@system-root)/$(fhs-aclocal)
+autotools-aclocal-pathes:	$(aclocal-dir) $(aclocal-x11-dir) $(aclocal-pkg-dir)
+#autotools-cmd-autoreconf:	$(@@ENV/BRIEGEL_PREFIX)/scripts/autoconf-update $(autotools-aclocal-pathes)
+autotools-cmd-autoreconf:	$(@@ENV/BRIEGEL_CONFDIR)/scripts/autoconf-update $(autotools-aclocal-pathes)
+autoconf-exec-createconf:	cd $(@@srcdir) && $(autotools-cmd-autoreconf)
+
+++require-setting:		@@ENV/BRIEGEL_PREFIX

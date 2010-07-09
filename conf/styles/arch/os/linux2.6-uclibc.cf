@@ -1,0 +1,13 @@
+#
+# Linux/ucLibc
+#
+
+feature-enable=platform/pic:			on
+feature-enable=platform/rpath:			on
+feature-enable=platform/mmap:			on
+feature-enable=platform/lib-static:		off
+feature-enable=platform/lib-dynamic:		on
+feature-enable=platform/largefile:		on
+
+target-platform:				linux
+target-libc:					uclibc

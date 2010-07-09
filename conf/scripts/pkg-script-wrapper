@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ ! "$SYSROOT" ]; then
+    echo "pkg-config-filter: missing \$SYSROOT environment variable"
+fi
+
+export PKG_CONFIG_LIBDIR=$SYSROOT/usr/pkgconfig/
+
+($* |
+    sed -e "s~\-L/*$SYSROOT/*~-L=/~g; s~\-I/*$SYSROOT/*~-I=/~g;" | # protect already given sysroot 
+    sed -e "s~\-L/~-L=/~g; s~\-I/~-I=/~g;" | # add sysroot symbol to all absolute pathes
+    sed -e "s~\-L\=~-L$SYSROOT~g; s~\-I\=~-I$SYSROOT~g;" | # replace sysroot sign to sysroot path
+    cat ) || (echo "pkg-script-wrapper failed!" >&2; exit 1)

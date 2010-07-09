@@ -1,0 +1,19 @@
+#
+# definitions for use of pkg-config
+# this is a little bit tricky ...
+#
+
+## default search path ## 
+pkgconf-default:	$(@@system-root)/$(fhs-pkgconfig)/
+
+pkg-config-cmd:		$(@@ENV/BRIEGEL_CONFDIR)/scripts/pkg-config-filter
+pkg-config-path:	$(pkgconf-default):$(pkgconf-add)
+pkg-config-env:		PKG_CONFIG_LIBDIR=$(pkg-config-path) PKG_CONFIG_PATH=$(pkg-config-path) PKG_CONFIG=$(pkg-config-cmd)
+#pkg-config-env:	PKG_CONFIG=$(pkg-config-cmd) PKG_CONFIG_LIBDIR=$(pkgconf-default) PKG_CONFIG_PATH=$(pkg-config-path)
+
+## wrapper command for old style foo-config scripts
+pkg-script-wrapper:	/install/config/scripts/pkg-script-wrapper
+
+## this is run in postinstall stage
+#pkg-config-fixup:	SYSROOT=$(@@system-root) /install/config/scripts/pkg-config-fixup $(@@install-root)
+pkg-config-fixup:	echo "pkg-config-fixup currently disabled"

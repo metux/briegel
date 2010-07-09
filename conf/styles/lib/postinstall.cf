@@ -1,0 +1,8 @@
+
+## for postprocessing installed files (i.e. compressing)
+post-install-mandir:	$(package-install-mandir)
+post-install-infodir:	$(package-install-infodir)
+
+postinstall-mandir:	$(package-install-mandir)
+postinstall-infodir:	$(package-install-infodir)
+postinstall-exec:	$(pkg-config-fixup)

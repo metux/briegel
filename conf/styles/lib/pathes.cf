@@ -1,0 +1,45 @@
+##
+## Briegel Buildsystem
+##
+## Copyright Enrico Weigelt, metux IT service <weigelt@metux.de>, http://www.metux.de/
+##
+##
+## This style defines the important pathnames
+##
+
+## port full qualified ident
+port-identkey:			$(@@port-name)-$(@@version)$(@@feature-tag)$(pkg-build-tag)
+
+## directories for packaging
+packaging-basedir:		$(@@ENV/HOME)/var/briegel/install-root/$(target-name)/$(port-identkey)/
+packaging-install-root:		$(packaging-basedir)/ROOT/
+packaging-meta-root:		$(packaging-basedir)/META/
+
+## binary package archive
+packaging-archive-format:	tar.bz2
+packaging-archive-dir:		$(@@ENV/HOME)/var/briegel/binpkg/$(target-name)/
+packaging-archive-file:		$(packaging-archive-dir)/$(port-identkey).$(packaging-archive-format)
+
+## we normally enable this, to prevent pollution problems when the same
+## package is built with different options
+packaging-clean-basedir:	yes
+
+## metadata directories
+meta-prefix:			$(@@meta-root)/$(@@meta-dir)/
+meta-info:			$(meta-prefix)info
+meta-exports-db:		$(meta-prefix)exports.db
+meta-buildconf-db:		$(meta-prefix)buildconf.db
+meta-buildconf-dump:		$(meta-prefix)buildconf.dump
+
+## Where source files and trees are stored
+!!source-directory:		$(@@ENV/HOME)/var/briegel/tarballs/$(source-package)/
+!!source-version:		$(@@version)
+!!source-package:		$(@@package-name)
+!!source-buildroot:		$(@@ENV/HOME)/var/briegel/src/$(target-name)/$(port-identkey)
+
+## Target image directories
+image-install-root:		$(@@ENV/HOME)/var/images/$(target-name)/
+image-meta-root:		$(@@ENV/HOME)/var/images.meta/$(target-name)/
+
+## Mass-Buildtests
+massbuild-log-dir:		$(@@ENV/HOME)/var/briegel/logs/massbuild/$(target-name)/$(@@port-name)-$(@@version)/$(@@ENV/BRIEGEL_MASSBUILD_KEY)/

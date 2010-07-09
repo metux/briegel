@@ -1,0 +1,51 @@
+##
+## Briegel Buildsystem
+##
+## Copyright Enrico Weigelt, metux IT service <weigelt@metux.de>, http://www.metux.de/
+##
+##
+## This script is loaded at the very start of all, *before* any package/port.
+## (directly included by the target's briegel.conf).
+##
+## if you intend to overwrite some variables in packages / ports,
+## do *NOT* put them here - they normally have precedence
+##
+
+# we use this variable, so it can be overwritten by several packages ...
+# hmm, is this useful ? no idea ;-o
+_cfgdir:		$(@@ENV/BRIEGEL_CONFDIR)
+_sysdir:		$(_cfgdir)/targets/$(target-name)/
+sysroot-image:		$(build-toolchain-root)/sysroot.build.tar.bz2
+world-file:		$(_sysdir)/etc/briegel/world
+
+init-dirs:		$(@@install-root)
+init-dirs:		$(@@meta-root)
+init-dirs:		$(packaging-archive-dir)
+init-dirs:		$(pkg-init-dirs)
+init-dirs:		$(source-directory)
+init-dirs:		$(style-init-dirs)
+
+port-db-dir:			$(_sysdir)/ports/
+port-db-conf:			$(port-db-dir)/$(@@port-name).cf
+port-db-version-conf:		$(port-db-dir)/$(@@port-name)-$(@@version).cf
+
+package-db-dir:			$(_cfgdir)/packages/$(@@package-name)/
+package-db-conf:		$(package-db-dir)/package.cf
+package-db-version-conf:	$(package-db-dir)/package-$(package-db-version-ident).cf
+package-db-version-ident:	$(@@version)
+
+version:			$(@@version)
+
+allow-missing-version-buildconf:	on
+allow-missing-version-pkgconf:		off
+
+@style:					lib/pathes
+@style:					lib/toolchain
+@style:					hosttype/machine/$(target-kernel)-$(target-libc)-$(target-cputype)
+
+++require-setting:			@@hosttype@@
+
+log-exec-stdout:			stdout
+log-exec-stderr:			stderr
+
+build-toolchain-root:			$(@@ENV/HOME)/x-tools/$(target-name)

@@ -1,0 +1,3 @@
+postinstall-cmd:	bash $(@@package-db-dir)/postexec.sh
+postinstall-env:	INSTALL_ROOT=$(install-root)
+postinstall-exec:	$(postinstall-env) $(postinstall-cmd)
