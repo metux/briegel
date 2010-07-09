@@ -1,0 +1,73 @@
+#
+# This is a style for really clean gnu-make environments which
+# properly implement all common features (i.e. install-root)
+#
+# It several config variables via env to the make command:
+# (in upper-case as well as in lower-case)
+#
+# + PREFIX        = $(package-install-prefix)
+# + BINDIR        = $(package-install-bindir)
+# + SBINDIR       = $(package-install-sbindir)
+# + MANDIR        = $(package-install-mandir)
+# + LIBDIR        = $(package-install-libdir)
+# + SYSCONFDIR    = $(package-install-sysconfdir)
+# + DATADIR       = $(package-install-datadir)
+# + LOCALSTATEDIR = $(package-install-localstatedir)
+# + INFODIR       = $(package-install-infodir)
+# + LIBEXECDIR    = $(package-install-libexecdir)
+#
+
+builder:			gmake
+
+default-install-root:		/
+
+@style:				lib/fhs
+@style:				lib/postinstall
+
+## builder capabilities
+builder-supports-install-strip:	yes
+builder-supports-subdir:	yes
+
+install-strip:			yes
+
+## gmake builder specific stufff ##
+gmake-makefile:			Makefile
+gmake-param-install:		DESTDIR=$(@@install-root)
+gmake-rule-install:		install
+gmake-rule-build:		#
+gmake-exec-install:		$(gmake-env) make -f $(gmake-makefile) $(gmake-env-pathes) $(gmake-param-toolchain) $(gmake-param-add) $(gmake-param-install) $(gmake-rule-install)
+gmake-exec-build:		$(gmake-env) make -f $(gmake-makefile) $(gmake-env-pathes) $(gmake-param-toolchain) $(gmake-param-add) $(gmake-param-install) $(gmake-rule-build)
+gmake-env:			$(gmake-env-add)
+gmake-env-install:		$(gmake-env-pathes) $(gmake-env)
+gmake-env-build:		$(gmake-env-pathes) $(gmake-env)
+gmake-subdir:			#
+
+__gm_prefix:			$(package-install-prefix)
+__gm_bindir:			$(package-install-sys-bindir)
+__gm_sbindir:			$(package-install-sys-sbindir)
+__gm_sysconfdir:		$(package-install-sysconfdir)
+__gm_libdir:			$(package-install-sys-libdir)
+__gm_mandir:			$(package-install-mandir)
+__gm_datadir:			$(package-install-datadir)
+__gm_libexecdir:		$(package-install-libexecdir)
+__gm_infodir:			$(package-install-infodir)
+__gm_localstatedir:		$(package-install-localstatedir)
+
+__gm_pathes_up:			PREFIX=$(__gm_prefix) LIBDIR=$(__gm_libdir) BINDIR=$(__gm_bindir) SBINDIR=$(__gm_sbindir) SYSCONFDIR=$(__gm_sysconfdir) LOCALSTATEDIR=$(__gm_localstatedir) INFODIR=$(__gm_infodir) LIBEXECDIR=$(__gm_libexecdir) DATADIR=$(__gm_datadir) MANDIR=$(__gm_mandir)
+__gm_pathes_lo:			prefix=$(__gm_prefix) libdir=$(__gm_libdir) bindir=$(__gm_bindir) sbindir=$(__gm_sbindir) sysconfdir=$(__gm_sysconfdir) localstatedir=$(__gm_localstatedir) infodir=$(__gm_infodir) libexecdir=$(__gm_libexecdir) datadir=$(__gm_datadir) mandir=$(__gm_mandir)
+
+gmake-env-pathes:		SYSROOT=$(@@system-root) $(__gm_pathes_up) $(__gm_pathes_lo)
+
+gmake-param-toolchain:		$(build-toolchain-env)
+
+++require-setting:		source-format
+++require-setting:		source-version
+++require-setting:		source-package
+++require-setting:		package-install-prefix
+++require-setting:		package-install-bindir
+++require-setting:		package-install-sbindir
+++require-setting:		package-install-libdir
+++require-setting:		package-install-mandir
+++require-setting:		package-install-sysconfdir
+
+feature-defvar:			gmake-feature-opts
