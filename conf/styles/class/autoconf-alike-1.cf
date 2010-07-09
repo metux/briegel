@@ -1,0 +1,66 @@
+#
+# this style is used for packages which provide an autoconf-alike
+# ./configure script and build schema, but are NOT really autconf'ed,
+# so there's nothing to regenerate (ie. w/ autoreconf, etc)
+#
+
+@style:				lib/fhs
+@style:				lib/postinstall
+@style:				lib/pkg-config
+
+builder:			autoconf
+
+## builder capabilities ##
+builder-supports-install-strip:	yes
+builder-supports-subdir:	yes
+
+## these variables may be overwritten by the port ##
+autoconf-build-workdir:		_briegel_build_
+autoconf-cross-options:		# ports may specify stuff required for crosscompiling here, i.e. disable tests, etc
+autoconf-param-instroot:	DESTDIR
+autoconf-makefile:		$(@@workdir)/Makefile
+
+## autoconf builder specific stufff ##
+autoconf-install-param:		$(autoconf-param-instroot)=$(@@install-root)
+autoconf-cmd-configure:		configure
+autoconf-uri-optfile:		$(@@package-db-dir)/amconfigure.opts
+autoconf-exec-configure:	$(@@srcdir)/$(autoconf-cmd-configure) $(autoconf-cross-options)
+
+# as long as install-strip doesnt work properly ...
+autoconf-rule-install:		install
+#autoconf-rule-install:		install-strip
+autoconf-rule-install-strip:	install-strip
+
+## additional environment variables ##
+autoconf-env:			$(build-toolchain-env) $(autoconf-env-pkg) $(pkg-config-env) $(autoconf-param-instroot)=$(@@install-root) BUILD_WORKDIR=$(@@workdir) SRCDIR=$(@@srcdir)
+autoconf-env-configure:		$(autoconf-env)
+autoconf-env-make:		$(autoconf-env)
+autoconf-env-install:		$(autoconf-env)
+autoconf-env-pkg:		#
+
+autoconf-enable-arch-sse:	--enable-sse
+autoconf-enable-arch-mmx:	--enable-mmx
+
+autoconf-codegen-args:		--with-pic --enable-shared --disable-static
+
+autotools-cmd-autoreconf:	echo
+
+install-strip:			yes
+
+++require-setting:		version
+++require-setting:		source-package
+++require-setting:		source-version
+++require-setting:		source-format
+++require-setting:		autotools-cmd-autoreconf
+
+++autoconf-path-args:		--prefix=$(package-install-prefix)
+++autoconf-path-args:		--sysconfdir=$(package-install-confdir)
+++autoconf-path-args:		--localstatedir=$(package-install-localstatedir)
+++autoconf-path-args:		--bindir=$(package-install-bindir)
+++autoconf-path-args:		--sbindir=$(package-install-sbindir)
+++autoconf-path-args:		--libdir=$(package-install-libdir)
+++autoconf-path-args:		--libexecdir=$(package-install-libexecdir)
+++autoconf-path-args:		--infodir=$(package-install-infodir)
+++autoconf-path-args:		--mandir=$(package-install-mandir)
+
+feature-defvar:			autoconf-feature-opts
