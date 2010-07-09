@@ -1,0 +1,4 @@
+#feature:		cpp
+#on:			--with-cxx
+#off:			--without-cxx
+#--

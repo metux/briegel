@@ -1,0 +1,5 @@
+@style:					class/autotools-2-features
+@style:					source/oss-qm-git-2
+warn-missing-available-versions:	off
+autoconf-exec-createconf:		cd $(@@srcdir) && /bin/bash ./autogen.sh
+builder-supports-install-strip:		off
