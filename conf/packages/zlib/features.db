@@ -1,0 +1,4 @@
+feature:	shared-library
+on:		--shared
+off:		--static
+--

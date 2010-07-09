@@ -1,0 +1,4 @@
+@style:				class/autoconf-alike-1-features
+@style:				source/oss-qm-git-2
+autoconf-build-workdir:		./
+builder-supports-install-strip:	no

@@ -1,0 +1,16 @@
+$(ac-opts)
+$(ac-pkg-opts)
+$(autoconf-feature-opts)
+
+## it does *not* understand all autoconf-style parameters
+## FIXME !
+
+--prefix=$(package-install-prefix)
+--sysconfdir=$(package-install-confdir)
+--localstatedir=$(package-install-localstatedir)
+--libdir=$(package-install-libdir)
+--bindir=$(package-install-bindir)
+--sbindir=$(package-install-sbindir)
+--libexecdir=$(package-install-libexecdir)
+--infodir=$(package-install-infodir)
+--mandir=$(package-install-mandir)
