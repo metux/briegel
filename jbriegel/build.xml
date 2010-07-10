@@ -126,7 +126,7 @@
     <target name="compile-lib-cmd" depends="compile-lib-base,compile-lib-conf,compile-lib-depend,compile-lib-stages,compile-lib-robots,compile-lib-stages">
 	<mkdir dir="${build-lib}" />
 	<javac destdir="${build-lib}" srcdir="${src}/cmd" debug="on" classpath="${metux-lib}:${build-lib}:." includeantruntime="false">
-            <include name="Init.java"/>
+	    <include name="CommandBase.java" />
             <include name="build.java"/>
             <include name="build_all_variants.java"/>
             <include name="buildall.java"/>

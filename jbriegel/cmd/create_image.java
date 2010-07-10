@@ -5,14 +5,24 @@ import org.de.metux.briegel.base.EBriegelError;
 import org.de.metux.briegel.conf.IConfig;
 import org.de.metux.briegel.robots.CreateSystemImage;
 
-/* this command fetches the source of a given port */
-public class create_image
+/* this command creates a whole system image */
+
+public class create_image extends CommandBase
 {
-    public static void main(String argv[]) throws EBriegelError
+    public create_image()
     {
-	Init init = new Init();
-	IConfig cf = init.LoadGlobal();
+	super("create_image");
+    }
+
+    public void cmd_main(String argv[]) throws EBriegelError
+    {
+	IConfig cf = getGlobalConfig();
 	cf.cf_set("@@port-name","<MAIN>");
 	new CreateSystemImage(cf).run();
+    }
+
+    public static void main(String argv[])
+    {
+	new create_image().run(argv);
     }
 }

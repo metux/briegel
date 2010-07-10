@@ -6,20 +6,30 @@ import org.de.metux.briegel.conf.IConfig;
 import org.de.metux.briegel.robots.RecursiveBuild;
 import org.de.metux.briegel.robots.InstallRuntimeBinpkg;
 
-/* this command fetches the source of a given port */
-public class install_port
+/* this command installs an port into the target image */
+
+public class install_port extends CommandBase
 {
-    public static void main(String argv[]) throws EBriegelError
+    public install_port()
     {
-	Init init = new Init();
+	super("install_port");
+    }
+
+    public void cmd_main(String argv[]) throws EBriegelError
+    {
 	if (argv.length==0)
 	{
 	    System.err.println("install_port <port>");
-	    System.exit(1);
+	    System.exit(exitcode_err_missing_port);
 	}
-	    
-	IConfig cf = init.LoadPort(argv[0]);
+
+	IConfig cf = getPortConfig(argv[0]);
 	new RecursiveBuild(cf).run();
 	new InstallRuntimeBinpkg(cf).run();
+    }
+
+    public static void main(String argv[])
+    {
+	new install_port().run(argv);
     }
 }

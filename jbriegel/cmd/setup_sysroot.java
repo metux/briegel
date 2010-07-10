@@ -4,19 +4,28 @@ package org.de.metux.briegel.cmd;
 import org.de.metux.briegel.base.EBriegelError;
 import org.de.metux.briegel.stages.SetupSysroot;
 
-/* this command fetches the source of a given port */
-public class setup_sysroot
+/* this command sets up the sysroot image for toolchain */
+
+public class setup_sysroot extends CommandBase
 {
-    public static void main(String argv[]) throws EBriegelError
+    public setup_sysroot()
     {
-	Init init = new Init();
-	
+	super("setup_sysroot");
+    }
+
+    public void cmd_main(String argv[]) throws EBriegelError
+    {
 	if (argv.length==0)
 	{
 	    System.err.println("setup-sysroot: missing port name");
 	    return;
 	}
 
-	new SetupSysroot(init.LoadGlobal()).run();
+	new SetupSysroot(getGlobalConfig()).run();
+    }
+
+    public static void main(String argv[])
+    {
+	new setup_sysroot().run(argv);
     }
 }

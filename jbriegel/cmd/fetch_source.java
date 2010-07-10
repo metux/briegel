@@ -5,19 +5,26 @@ import org.de.metux.briegel.base.EBriegelError;
 import org.de.metux.briegel.stages.FetchSource;
 
 /* this command fetches the source of a given port */
-public class fetch_source
+public class fetch_source extends CommandBase
 {
-    public static void main(String argv[]) throws EBriegelError
+    public fetch_source()
     {
-	Init init = new Init();
-	
+	super("fetch_source");
+    }
+
+    public void cmd_main(String argv[]) throws EBriegelError
+    {
 	if (argv.length==0)
 	{
 	    System.err.println("build: missing port name");
 	    return;
 	}
 
-	FetchSource bot = new FetchSource(init.LoadPort(argv[0]));
-	bot.run();
+	new FetchSource(getPortConfig(argv[0])).run();
+    }
+
+    public static void main(String argv[])
+    {
+	new fetch_source().run(argv);
     }
 }

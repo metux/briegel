@@ -6,12 +6,16 @@ import org.de.metux.briegel.base.EPropertyInvalid;
 import org.de.metux.briegel.conf.IConfig;
 
 /* this command fetches the source of a given port */
-public class cf_query
+public class cf_query extends CommandBase
 {
-    public static void main(String argv[]) throws EBriegelError
+    public cf_query()
+    {
+	super("cf_query");
+    }
+
+    public void cmd_main(String argv[]) throws EBriegelError
     {
 	IConfig globalcf;
-	Init init = new Init();
 	
 	if (argv.length==0)
 	{
@@ -19,16 +23,15 @@ public class cf_query
 	    System.exit(1);
 	}
 
-	
 	if (argv[0].equals("--debug"))
 	{
 	    argv[0] = argv[1];
-	    globalcf = init.LoadGlobal();
+	    globalcf = getGlobalConfig();
 	}
 	else
 	{
-	    init.silent = true;
-	    globalcf = init.LoadGlobal();
+	    silent = true;
+	    globalcf = getGlobalConfig();
 	}
 
 	String res;
@@ -45,5 +48,10 @@ public class cf_query
 	}
 
 	System.out.print(res);
+    }
+
+    public static void main(String argv[])
+    {
+	new cf_query().run(argv);
     }
 }
