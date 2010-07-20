@@ -1,0 +1,13 @@
+$(ac-opts)
+$(ac-pkg-opts)
+$(autoconf-feature-opts)
+
+--prefix=$(package-install-prefix)
+--sysconfdir=$(package-install-confdir)
+--localstatedir=$(package-install-localstatedir)
+--libdir=$(package-install-libdir)
+--bindir=$(package-install-bindir)
+--sbindir=$(package-install-sbindir)
+--libexecdir=$(package-install-libexecdir)
+--infodir=$(package-install-infodir)
+--mandir=$(package-install-mandir)

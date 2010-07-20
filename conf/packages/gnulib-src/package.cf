@@ -1,0 +1,5 @@
+@style:			class/autoconf-alike-1
+@style:			source/oss-qm-git-2
+
+autoconf-build-workdir:	./
+autoconf-makefile:	$(@@workdir)/Makefile_install
