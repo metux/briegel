@@ -28,9 +28,10 @@ public class Install extends Stage
 	String workdir = config.getPropertyString("@@workdir");
 	String instpar = config.getPropertyString("autoconf-install-param");
 	String env     = config.getPropertyString("autoconf-env-install");
+	String mk      = config.getPropertyString("autoconf-makefile");
 
 	String cmdline = 
-	    "cd "+workdir+" && "+env+" make "+rule+" "+instpar;
+	    "cd "+workdir+" && "+env+" make -f "+mk+" "+rule+" "+instpar;
 
 	if (!exec(
 	    cmdline,

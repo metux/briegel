@@ -25,13 +25,11 @@ public class Build extends Stage
 	String makefile = config.getPropertyString("autoconf-makefile");
 
 	String rule = config.getPropertyString("autoconf-rule-make","");
-	
-	String mk = workdir+"/"+makefile;
-	
-	if (!(new File(mk).exists()))
-	    throw new EBuildFailed("configure didnt generate makefile "+mk);
-	    
-	String cmdline = "cd "+workdir+" && "+env+" make "+rule;
+
+	if (!(new File(makefile).exists()))
+	    throw new EBuildFailed("configure didnt generate makefile "+makefile);
+
+	String cmdline = "cd "+workdir+" && "+env+" make -f "+makefile+" "+rule;
 	
 	if (!exec(
 	    cmdline+"; export retval=$? ; echo ; exit $retval",
