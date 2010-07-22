@@ -15,30 +15,50 @@ public class cf_query extends CommandBase
 
     public void cmd_main(String argv[]) throws EBriegelError
     {
-	IConfig globalcf;
-	
+	IConfig cf = null;
+
 	if (argv.length==0)
 	{
 	    System.err.println("build: variable name");
 	    System.exit(1);
 	}
 
-	if (argv[0].equals("--debug"))
+	silent = true;
+
+	String get_variable = null;
+
+	for (int x=0; x<argv.length; x++)
 	{
-	    argv[0] = argv[1];
-	    globalcf = getGlobalConfig();
+	    if (argv[x].equals("--debug"))
+	    {
+		System.err.println("Debug mode");
+		silent = false;
+	    }
+	    else if (argv[x].equals("--port"))
+	    {
+		x++;
+		cf = getPortConfig(argv[x]);
+	    }
+	    else
+	    {
+		get_variable = argv[x];
+	    }
 	}
-	else
+
+	if (cf == null)
+	    cf = getGlobalConfig();
+
+	if (get_variable == null)
 	{
-	    silent = true;
-	    globalcf = getGlobalConfig();
+	    System.err.println("Missing variable name");
+	    System.exit(3);
 	}
 
 	String res;
 	
 	try
 	{
-	    res = globalcf.cf_get_str(argv[0]);
+	    res = cf.cf_get_str(get_variable);
 	}
 	catch (EPropertyInvalid e)
 	{
