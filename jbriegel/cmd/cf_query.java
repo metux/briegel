@@ -33,41 +33,40 @@ public class cf_query extends CommandBase
 	    {
 		System.err.println("Debug mode");
 		silent = false;
+		argv[x] = null;
 	    }
+	}
+
+	cf = getGlobalConfig();
+
+	for (int x=0; x<argv.length; x++)
+	{
+	    if (argv[x].equals("--debug"));
 	    else if (argv[x].equals("--port"))
 	    {
 		x++;
 		cf = getPortConfig(argv[x]);
 	    }
+	    else if (argv[x].equals("--set"))
+	    {
+		cf.cf_set(argv[x+1],argv[x+2]);
+		x+=2;
+	    }
 	    else
 	    {
-		get_variable = argv[x];
+		try
+		{
+		    String res = cf.cf_get_str(argv[x]);
+		    System.out.println(res);
+		}
+		catch (EPropertyInvalid e)
+		{
+		    System.err.println(e);
+		    System.exit(2);
+		    return;
+		}
 	    }
 	}
-
-	if (cf == null)
-	    cf = getGlobalConfig();
-
-	if (get_variable == null)
-	{
-	    System.err.println("Missing variable name");
-	    System.exit(3);
-	}
-
-	String res;
-	
-	try
-	{
-	    res = cf.cf_get_str(get_variable);
-	}
-	catch (EPropertyInvalid e)
-	{
-	    System.err.println(e);
-	    System.exit(2);
-	    return;
-	}
-
-	System.out.print(res);
     }
 
     public static void main(String argv[])
