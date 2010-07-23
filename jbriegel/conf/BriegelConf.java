@@ -21,6 +21,7 @@ import org.de.metux.util.Environment;
 
 import org.de.metux.datasource.TextTable;
 import org.de.metux.datasource.Cached_TextTable_Loader;
+import org.de.metux.datasource.Cached_TextDB_Loader;
 
 import org.de.metux.propertylist.IPropertylist;
 import org.de.metux.propertylist.IPostprocessor;
@@ -69,6 +70,7 @@ public class BriegelConf implements IConfig
     boolean processed_db_system     = false;
 
 	static Cached_TextTable_Loader ttloader = new Cached_TextTable_Loader();
+	static Cached_TextDB_Loader textdb_loader = new Cached_TextDB_Loader();
 
     private class postprocessor implements IPostprocessor
     {
@@ -77,6 +79,24 @@ public class BriegelConf implements IConfig
 	{
 	    throw new RuntimeException ( "should never be reached! ");
 	}
+    }
+
+    private boolean __load_properties_sub(String fn)
+    {
+	Properties pr = textdb_loader.load(fn);
+	if (pr == null)
+	    return false;
+	thisconf.loadProperties_sub(pr);
+	return true;
+    }
+
+    private boolean __load_properties_top(String fn)
+    {
+	Properties pr = textdb_loader.load(fn);
+	if (pr == null)
+	    return false;
+	thisconf.loadProperties_top(pr);
+	return true;
     }
 
     /* --- special handling for @style directives --- */
@@ -102,7 +122,7 @@ public class BriegelConf implements IConfig
 	    {
 		String fn = StrReplace.replace
 		    ("{STYLE}", style_list[x], stylepath);
-	    	if (!thisconf.loadTextDB_sub(fn))
+		if (!__load_properties_sub(fn))
 		    throw new EMissingStyle(style_list[x]);
 
 		loaded_styles += style_list[x] + " ";
@@ -180,13 +200,13 @@ public class BriegelConf implements IConfig
 	   Probably some package profiles have to be changed to work again. 
 	*/
 
-	if (!thisconf.loadTextDB_sub(fn))
+	if (!__load_properties_sub(fn))
 	    throw new EMissingPackage(pkgname);
 
 	run_postprocess();
 	
 	String fn_ver = cf_get_str_mandatory("package-db-version-conf");
-	if (thisconf.loadTextDB_sub(fn_ver))
+	if (__load_properties_sub(fn_ver))
 	    debug("loaded package version cf "+fn_ver);
 	else
 	    debug("no version package cf "+fn_ver);
@@ -308,12 +328,11 @@ public class BriegelConf implements IConfig
 	}
 
 	thisconf.setPostprocessor(new postprocessor());
-	thisconf.enable_datasource_cache = true;
 	
 	thisconf.set(SP_globalconf, configfile);
 	debug("loading global config: "+configfile);
 
-	if (!thisconf.loadTextDB_sub(configfile))
+	if (!__load_properties_sub(configfile))
 	    throw new EMissingGlobalConf(configfile);
 
 	cf_add("@style", cf_get_str("preload-style"));
@@ -407,7 +426,7 @@ public class BriegelConf implements IConfig
 	/* load master port config */ 
 	String port_fn = cf_get_str_mandatory("port-db-conf");
 	notice("Loading port: "+dep.package_name+" ("+port_fn+")");
-        if (!thisconf.loadTextDB_top(port_fn))
+        if (!__load_properties_top(port_fn))
 	    throw new EMissingPort(port_fn);
 
 	process_version();
@@ -416,8 +435,8 @@ public class BriegelConf implements IConfig
 	
 	String port_ver_fn = cf_get_str_mandatory("port-db-version-conf");
 	cf_set("@@port-db-version-conf", port_ver_fn);
-	    
-	if (thisconf.loadTextDB_top(port_ver_fn))
+
+	if (__load_properties_top(port_ver_fn))
 	    notice("Loaded port version config: "+port_ver_fn);
 //	else
 //	    warning("Missing port version config: "+port_ver_fn);
