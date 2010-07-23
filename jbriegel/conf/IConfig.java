@@ -58,7 +58,6 @@ public interface IConfig
     public VersionStack getNewerVersions() throws EPropertyInvalid, EPropertyMissing;
     public String[] getWorldList() throws EPropertyInvalid, EPropertyMissing;
     public String   getPortName() throws EPropertyInvalid, EPropertyMissing;
-    public UniqueNameList getImmutableList();
 
     public String getPropertyString(String name, String def)
 	throws EPropertyInvalid, EPropertyMissing;

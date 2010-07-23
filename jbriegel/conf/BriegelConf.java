@@ -769,9 +769,4 @@ public class BriegelConf implements IConfig
     {
 	return cf_get_str_mandatory(SP_port_name);
     }
-    
-    public UniqueNameList getImmutableList()
-    {
-	return thisconf.immutables;
-    }
 }
