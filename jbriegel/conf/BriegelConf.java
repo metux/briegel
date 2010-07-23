@@ -717,9 +717,10 @@ public class BriegelConf implements IConfig
 	{
 	    String feature = feature_decl[x];
 	    String stat;
-	    try 
+	    try
 	    {
-	        if(cf_get_boolean("feature-enable="+feature))
+	        if(cf_get_boolean("feature-enable="+feature,
+	           cf_get_boolean("@@feature-enable="+feature)))
 		{
 		    stat = "feature-addvar-on=";
 		    feature_tag += "+"+fix_feature_name(cf_get_str("feature-id="+feature));

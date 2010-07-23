@@ -41,13 +41,14 @@ public class BulkBuild extends Stage
     {
 	String tag = "";
 	IConfig variant = ((BriegelConf)config).allocConfig();
-	UniqueNameList immutables = variant.getImmutableList();
 	for (int x=0; x<features.length; x++)
 	{
 	    tag += (flags[x]?"+":"-")+features[x];
 	    String n = "feature-enable="+features[x];
-	    variant.cf_set(n,(flags[x]?"true":"false"));
-	    immutables.add(n);
+	    /* the $(@@feature-enable) always takes precedence over $(feature-enable)
+	       this way we can override the settings in the port-conf */
+	    variant.cf_set("feature-enable="+features[x],(flags[x]?"true":"false"));
+	    variant.cf_set("@@feature-enable="+features[x],(flags[x]?"true":"false"));
 	}
 	error("TAG: "+tag);
 	variant.LoadPort(config.getPortName());
