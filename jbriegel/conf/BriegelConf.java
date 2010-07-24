@@ -573,8 +573,8 @@ public class BriegelConf implements IConfig
 	    throw new EPropertyMissing(name);
 	return value;
     }	
-    
-    public boolean cf_get_boolean(String name) 
+
+    public boolean cf_get_boolean(String name)
 	throws EPropertyInvalid
     {
 	try
@@ -743,6 +743,19 @@ public class BriegelConf implements IConfig
     	return name.replace('/','_'); 
     }
 
+    private boolean __cf_is_set(String name)
+	throws EPropertyInvalid
+    {
+	return cf_get_str_n(name) != null;
+    }
+
+    private boolean __is_feature_enabled(String name)
+	throws EPropertyInvalid
+    {
+	String k = "feature-enable="+name;
+	return cf_get_boolean((__cf_is_set(k) ? k : "@@"+k));
+    }
+
     private void process_features()
 	throws EMissingFeatureSwitch, EPropertyMissing,
 	    EPropertyInvalid
@@ -751,34 +764,26 @@ public class BriegelConf implements IConfig
 	String def_addvar     = cf_get_str_mandatory("feature-defvar");
 	String feature_decl[] = cf_get_list("feature-declare");
 	String missing        = null;
-	String feature_tag = "";
-		
+	String feature_tag    = "";
+
 	for (int x=0; x<feature_decl.length; x++)
 	{
 	    String feature = feature_decl[x];
-	    String stat;
 	    try
 	    {
-	        if(cf_get_boolean("feature-enable="+feature,
-	           cf_get_boolean("@@feature-enable="+feature)))
-		{
-		    stat = "feature-addvar-on=";
-		    feature_tag += "+"+fix_feature_name(cf_get_str("feature-id="+feature));
-		}
-		else
-		{
-		    stat = "feature-addvar-off=";
-		    feature_tag += "-"+fix_feature_name(cf_get_str("feature-id="+feature));
-		}
+		boolean enabled = __is_feature_enabled(feature);
+		String prefix = (enabled ? "feature-addvar-on=" : "feature-addvar-off=")+feature+"=";
 
-		cf_add(def_addvar, cf_get_str(stat+feature+"="+def_addvar));
+		feature_tag += (enabled ? "+" : "-")+fix_feature_name(cf_get_str("feature-id="+feature));
+
+		cf_add(def_addvar, cf_get_str(prefix+def_addvar));
 
 		/* now walk through all addvars and get them in */
 		// FIXME: perhaps we should use $(feature-...) ?
 		for (int y=0; y<add_vars.length; y++)
 		    cf_add(
 			add_vars[y],
-			cf_get_str(stat+feature+"="+add_vars[y]
+			cf_get_str(prefix+add_vars[y]
 		    ));
 	    }
 	    catch (EPropertyInvalid e)
