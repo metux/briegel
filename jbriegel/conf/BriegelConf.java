@@ -22,6 +22,7 @@ import org.de.metux.util.Environment;
 import org.de.metux.datasource.TextTable;
 import org.de.metux.datasource.Cached_TextTable_Loader;
 import org.de.metux.datasource.Cached_TextDB_Loader;
+import org.de.metux.datasource.Cached_Content_Loader;
 
 import org.de.metux.propertylist.IPropertylist;
 import org.de.metux.propertylist.IPostprocessor;
@@ -71,6 +72,7 @@ public class BriegelConf implements IConfig
 
 	static Cached_TextTable_Loader ttloader = new Cached_TextTable_Loader();
 	static Cached_TextDB_Loader textdb_loader = new Cached_TextDB_Loader();
+	static Cached_Content_Loader content_loader = new Cached_Content_Loader();
 
     private class postprocessor implements IPostprocessor
     {
@@ -143,12 +145,10 @@ public class BriegelConf implements IConfig
     {
 	if (processed_db_world)
 	    return false;
-	
-	thisconf.load_content(
+
+	cf_load_content(
 	    SP_db_world,
-	    new File(getPropertyString(cf_world_filename)),
-	    true
-	);
+	    getPropertyString(cf_world_filename));
 
 	processed_db_world = true;
 	return true;
@@ -164,11 +164,9 @@ public class BriegelConf implements IConfig
 	debug("checking for new versions ... ");
 	processed_csdb_versions = true;
 
-	return thisconf.load_content(
+	return cf_load_content(
 	    SP_csdb_available_versions,
-	    getPropertyURL(cf_csdb_query_versions_url),
-	    true
-	);
+	    getPropertyURL(cf_csdb_query_versions_url));
     }
 
     private boolean process_package()
@@ -614,9 +612,32 @@ public class BriegelConf implements IConfig
 	    throw new EPropertyInvalid(name,e);
 	}
     }
-    public boolean cf_load_content(String field, File filename)
+
+    public boolean cf_load_content(String property, String filename)
     {
-	return thisconf.load_content(field,filename,true);
+	String s = content_loader.load(filename, true);
+	if (s == null)
+	    return false;
+	thisconf.set(property, s);
+	return true;
+    }
+
+    public boolean cf_load_content(String property, File filename)
+    {
+	String s = content_loader.load(filename, true);
+	if (s == null)
+	    return false;
+	thisconf.set(property, s);
+	return true;
+    }
+
+    public boolean cf_load_content(String property, URL url)
+    {
+	String s = content_loader.load(url, true);
+	if (s == null)
+	    return false;
+	thisconf.set(property, s);
+	return true;
     }
 
     private void process_required_settings()
