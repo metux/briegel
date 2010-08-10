@@ -4,8 +4,8 @@ if [ ! "$BRIEGEL_SYSTEM" ]; then
     exit 1;
 fi
 
-if [ ! "$BRIEGEL_ROOT" ]; then
-    echo "$0: missing BRIEGEL_ROOT";
+if [ ! "$BRIEGEL_PREFIX" ]; then
+    echo "$0: missing BRIEGEL_PREFIX";
 fi
 
 if [ ! "$BRIEGEL_CMDLIB" ]; then

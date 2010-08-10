@@ -175,8 +175,8 @@ if [ ! "$BRIEGEL_JVM" ]; then
     export BRIEGEL_JVM=java
 fi
 
-if [ ! "$BRIEGEL_ROOT" ]; then
-    export BRIEGEL_ROOT="${prefix}"
+if [ ! "$BRIEGEL_PREFIX" ]; then
+    export BRIEGEL_PREFIX="${prefix}"
 fi
 
 if [ ! "$BRIEGEL_CONFDIR" ]; then
