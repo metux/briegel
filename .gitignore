@@ -1,2 +1,14 @@
 *.class
+conf/targets/nibiru/ports/__MASSBUILD*.cf
+config.mk
+gcj/cmd.build
+gcj/cmd.build_all_variants
+gcj/cmd.buildall
+gcj/cmd.cf_query
+gcj/cmd.check_update
+gcj/cmd.create_image
+gcj/cmd.fetch_source
+gcj/cmd.install_port
+gcj/cmd.setup_sysroot
+gcj/libjbriegel.so
 jbriegel/.build
