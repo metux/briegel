@@ -1,0 +1,23 @@
+#!/bin/bash
+
+TEST_GCC=`pwd`/*-gcc
+
+if [ ! -x $TEST_GCC ] ; then
+    echo "Cannot find gcc. aborting"
+    exit 1
+fi
+
+GCC_CMD=`echo $TEST_GCC`
+prefix="${GCC_CMD//-gcc/}-"
+
+cat wrapper.in | sed -e "s°@COMMAND_PREFIX@°${prefix}°;" > wrapper
+chmod +x wrapper
+
+WRAPPER_COMMANDS="gcc cc ld ar as objdump objcopy nm populate ranlib
+                  readelf addr2line size strings strip cpp c++ g++
+                  gcov c++filt gprof"
+
+for w in $WRAPPER_COMMANDS ; do
+    rm -f $w
+    ln -s wrapper $w
+done

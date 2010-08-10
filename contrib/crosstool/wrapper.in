@@ -1,0 +1,33 @@
+#!/bin/bash
+
+COMMAND_PREFIX=@COMMAND_PREFIX@
+COMMAND="$0"
+
+if [ ! "$SYSROOT" ]; then
+    echo "${COMMAND}: missing SYSROOT variable"
+    exit 1
+fi
+
+CMDS_SYSROOT="gcc cc c++ g++ cpp"
+CMDS_NOSYSROOT="objdump objcopy ar as nm populate ranlib readelf addr2line size strings strip gcov c++filt gprof"
+
+CMDS_SKIPPED="populate"
+
+for cmd in ${CMDS_SYSROOT} ; do
+    case ${COMMAND} in
+	*-${cmd} | */${cmd})
+	    exec ${COMMAND_PREFIX}${cmd} --sysroot=${SYSROOT} $*
+	;;
+    esac
+done
+
+for cmd in ${CMDS_NOSYSROOT} ; do
+    case ${COMMAND} in
+	*-${cmd} | */${cmd})
+	    exec ${COMMAND_PREFIX}${cmd} $*
+	;;
+    esac
+done
+
+echo "wrapper: unhandled command \"${COMMAND}\"" >&2
+exit 99

@@ -1,0 +1,21 @@
+Toolchain wrapper generator for crosstoo-ng generated toolchains
+-----------------------------------------------------------------
+
+This little script generates a wrapper for the toolchain
+commands produced by crosstool-ng. It adds canonic symlinks
+to a wrapper, that properly calls the actual toolchain
+commands with certain fixups (eg. pass the --sysroot
+parameter where applicable).
+
+Howto:
+
+* copy init-wrapper and wrapper.in to the toolchain's bin directory
+  ($CT_PREFIX_DIR/bin) and run it there
+* it will detect the command naming (pathname prefix) and install
+  the wrapper and setup proper symlinks
+* this one will now require the $SYSROOT environment variable to be
+  set and passes it via the --sysroot parameter where applicable
+* now the toolchain commands can be canonically called under
+  $CT_PREIX_DIR/bin/<...> (where <...> is one of the commands, eg.
+  gcc, ld, etc)
+
