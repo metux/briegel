@@ -1,0 +1,87 @@
+Anti-Patent Affero GPL (PAGPL) version 3.0.3, 2010-08-10
+-------------------------------------------------
+
+The software is distributed under a modificated version of the
+"GNU Affero GPLv3", but with the following additional restrictions
+to (ab)use of patents.
+
+
+1. Definition of "patent tainted status".
+
+If the licensee is abusing patents of type stated in section 2, it gets
+into the "pantent tainted status", thereby looses *all* rights granted
+by this license and is obligated to further obligations according to
+section 4. This status applies to *all* software published under this
+license, will be registered in public blacklists and remains until the
+de-tainting process described in section 5 is passed.
+
+
+2. Tainting patents types and actions
+
+Patent types which trigger tainting are:
+
+* on software, logic, mathematical methods - regardless of being
+  implemented on general-purpose computers or special machineries
+* on data/information formats and encodings or languages
+* on all kind of genetic code whatsoever
+* on biologic structures and life forms in open biospheres,
+  regardless of natural or artificial
+* on medicine and medical use of substances found in open
+  biospheres - regardless of natural or artificial
+* on business methods
+* patents in general with application date back over 5 years.
+* patents which are either illegal or likely to loose fair trials
+  under the national jurisdiction of either the application or
+  the location of use
+
+A licensee gets tainted (primary tainting) as soon as he/she:
+
+* files a patent-violation suit or threatens to do so (with patents
+  of the type stated) against anybody, except when in direct defense
+  of such an action by the attacked entity against the licensee.
+* using those patents for product marketing
+
+
+3. Recursive tainting
+
+If the licensee is owned or controlled, by majority of at least 50%,
+by another tainted entity, the tainting applies recoursively, as long
+as that ownership/controlship remains. The majority is counted by
+effective shares on indirect ownership structures like holdings.
+
+This does not apply to employees and (permanent) contractors of tainted
+entities own their own (so, outside the business for the tainted enitity).
+
+
+4. Consequences of tainting
+
+At the moment of tainting, the licensee looses any rights granted by
+this license and is obligated to report this to the copyright holders.
+
+Primary-tainted are obligated to announce this issue on the usual
+public relation channels.
+
+Recursively tainted licensees are given an 4-weeks grace time to
+negotiate an parallel license with the copyright holders or break
+free from the tainting parent entitiy.
+
+
+5. Untainting of primary-tainted licensees
+
+For the untainting process, the primary licensee has to take back all
+suits and other legal actions on and completely give up (so: delete)
+the patents in question. This has to be announced publically as, and
+lawful evidence has to be given directly to the copyright holders.
+
+Recursively tainted licensees are untainted as soon as the conditions
+for recursive tainting are removed - eg. when the tainted parent has
+sold/given up enough shares or voting rights on the licensee - and
+the copyright holders have been given lawful evidence on that.
+
+
+6. License compatibility
+
+This license is explicitly compatible with the Affero GPL in regard
+of linking against or into other packages. On the other hand, the code
+under this license may not be relicensed under Affero- or plain GPL
+without explicit written permission by the copyright holders.
