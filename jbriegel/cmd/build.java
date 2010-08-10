@@ -10,7 +10,7 @@ public class build extends CommandBase
 {
     public void cmd_main(String argv[]) throws EBriegelError
     {
-	if ((argv == null) || (argv.length == 0))
+	if ((argv == null) || (argv.length == 0) || (argv[0] == null) || (argv[0].isEmpty()))
 	{
 	    System.err.println(myname+": missing port name");
 	    System.exit(exitcode_err_missing_port);
