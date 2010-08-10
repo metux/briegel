@@ -2,8 +2,15 @@
 # Porcelain target commands main multiplexer
 #
 
+[ "$BRIEGEL_GCJ"        ] || BRIEGEL_GCJ=@BRIEGEL_GCJ@
+[ "$BRIEGEL_LIBDIR"     ] || BRIEGEL_LIBDIR=@BRIEGEL_LIBDIR@
+[ "$BRIEGEL_LIBEXECDIR" ] || BRIEGEL_LIBEXECDIR=@BRIEGEL_LIBEXECDIR@
+
 export BRIEGEL_DEFAULT_JVM="@BRIEGEL_DEFAULT_JVM@"
 export BRIEGEL_DEFAULT_ROOT="@BRIEGEL_DEFAULT_ROOT@"
+export BRIEGEL_GCJ
+export BRIEGEL_LIBDIR
+export BRIEGEL_LIBEXECDIR
 
 if [ ! "$BRIEGEL_TARGET" ]; then 
     echo "$0: missing BRIEGEL_TARGET";
@@ -27,6 +34,43 @@ if [ ! "$BRIEGEL_CONF" ]; then
 fi
 
 export CLASSPATH="$CLASSPATH:@JAR_RT_JBRIEGEL@:@JMETUX_CLASSPATH@:@UNITOOL_CLASSPATH@"
+
+if $BRIEGEL_GCJ ; then
+
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$BRIEGEL_LIBDIR"
+
+    case "$BRIEGEL_COMMAND" in
+	setup-sysroot)
+	    $BRIEGEL_LIBEXECDIR/briegel/cmd.setup_sysroot "$*"
+	;;
+	fetch-source)
+	    $BRIEGEL_LIBEXECDIR/briegel/cmd.fetch_source "$*"
+	;;
+	install-port)
+	    $BRIEGEL_LIBEXECDIR/briegel/cmd.install_port "$*"
+	;;
+	create-package)
+	    $BRIEGEL_LIBEXECDIR/briegel/cmd.build "$*"
+	;;
+	create-image)
+	    $BRIEGEL_LIBEXECDIR/briegel/cmd.create_image "$*"
+	;;
+	check-update)
+	    $BRIEGEL_LIBEXECDIR/briegel/cmd.check_update "$*"
+	;;
+	build-all)
+	    $BRIEGEL_LIBEXECDIR/briegel/cmd.buildall "$*"
+	;;
+	cf-query)
+	    $BRIEGEL_LIBEXECDIR/briegel/cmd.cf_query $@
+	;;
+	*)
+	    echo "$0: unsupported command \"$BRIEGEL_COMMAND\"" >&2
+	    exit 1
+	;;
+    esac
+
+else
 
 case "$BRIEGEL_COMMAND" in
     setup-sysroot)
@@ -58,3 +102,5 @@ case "$BRIEGEL_COMMAND" in
 	exit 1
     ;;
 esac
+
+fi

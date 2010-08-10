@@ -13,6 +13,9 @@ all:		build
 lib/briegel/%.sh:	lib/briegel/%.sh.in
 	@cat $< | sed 's~@BRIEGEL_DEFAULT_ROOT@~$(BRIEGEL_PREFIX)~g;' 	\
 	       | sed 's~@BRIEGEL_DEFAULT_JVM@~$(BRIEGEL_JVM)~g;'	\
+	       | sed 's~@BRIEGEL_LIBEXECDIR@~$(BRIEGEL_LIBEXECDIR)~g'	\
+	       | sed 's~@BRIEGEL_LIBDIR@~$(BRIEGEL_LIBDIR)~g'	\
+	       | sed 's~@BRIEGEL_GCJ@~$(BRIEGEL_GCJ)~g'			\
 	       | sed 's~@UNITOOL_CLASSPATH@~$(UNITOOL_CLASSPATH)~g;'	\
 	       | sed 's~@UNITOOL_SCRIPT_PKG_CONFIG_FIXUP@~$(UNITOOL_SCRIPT_PKG_CONFIG_FIXUP)~g;'	\
 	       | sed 's~@JAR_RT_JBRIEGEL@~$(JAR_RT_JBRIEGEL)~g;'	\
@@ -22,6 +25,9 @@ lib/briegel/%.sh:	lib/briegel/%.sh.in
 bin/%:		bin/%.in
 	@cat $< | sed 's~@BRIEGEL_DEFAULT_ROOT@~$(BRIEGEL_PREFIX)~g;' 	\
 	       | sed 's~@BRIEGEL_DEFAULT_JVM@~$(BRIEGEL_JVM)~g;'	\
+	       | sed 's~@BRIEGEL_LIBEXECDIR@~$(BRIEGEL_LIBEXECDIR)~g'	\
+	       | sed 's~@BRIEGEL_LIBDIR@~$(BRIEGEL_LIBDIR)~g'	\
+	       | sed 's~@BRIEGEL_GCJ@~$(BRIEGEL_GCJ)~g'			\
 	       | sed 's~@UNITOOL_CLASSPATH@~$(UNITOOL_CLASSPATH)~g;'	\
 	       | sed 's~@UNITOOL_SCRIPT_PKG_CONFIG_FIXUP@~$(UNITOOL_SCRIPT_PKG_CONFIG_FIXUP)~g;'	\
 	       | sed 's~@JAR_RT_JBRIEGEL@~$(JAR_RT_JBRIEGEL)~g;'	\
