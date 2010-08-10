@@ -15,8 +15,8 @@ $(JAR_JBRIEGEL):
 	    ant
 
 install:	build
-	@echo "Installing to: $(DESTDIR)::$(BRIEGEL_PREFIX)"
-	@mkdir -p $(DESTDIR)$(BRIEGEL_PREFIX) $(DESTDIR)$(BRIEGEL_BINDIR) $(DESTDIR)$(BRIEGEL_LIBDIR)
+	@echo "Installing to: $(DESTDIR)::$(BRIEGEL_DATADIR)/briegel"
+	@mkdir -p $(BRIEGEL_DATADIR)/briegel
 	@cp $(JAR_JBRIEGEL) $(DESTDIR)$(JAR_RT_JBRIEGEL)
 
 clean:
