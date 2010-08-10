@@ -4,7 +4,6 @@
     <property name="build"           value=".build"         />
     <property name="build-lib"       value="${build}/lib"   />
     <property name="build-tests"     value="${build}/tests" />
-    <property name="metux-lib"       value="${env.HOME}/.jar/metux-java.jar" />
 
     <property name="destdir"        value="" />
     <property name="prefix"         value="${env.HOME}/.usr/jbriegel" />
@@ -15,8 +14,8 @@
     
     <property name="jarfile"         value="${build}/jbriegel.jar" />
     <property name="jar_install_dir" value="${libdir}" />
-    <property name="metux-runtime"   value="${libdir}/metux-java.jar" />
     <property name="briegel-runtime" value="${libdir}/jbriegel.jar" />
+    <property name="metux-lib"       value="${env.JMETUX_CLASSPATH}" />
     
     <property name="unitool-bindir"  value="${env.HOME}/.usr/unitool/bin" />
 
@@ -188,7 +187,7 @@ if [ ! "$BRIEGEL_CONF" ]; then
     export BRIEGEL_CONF="${sysconfdir}/systems/$BRIEGEL_SYSTEM/etc/briegel/briegel.conf"
 fi
 
-export CLASSPATH="$CLASSPATH:${metux-runtime}:${briegel-runtime}"
+export CLASSPATH="$CLASSPATH:${metux-lib}:${briegel-runtime}"
 
 case "$BRIEGEL_COMMAND" in
     setup-sysroot)
