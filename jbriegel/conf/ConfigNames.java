@@ -50,6 +50,12 @@ public class ConfigNames
     */
     public final static String SP_WorldSet    = "@@world";
 
+    /* Global config file name (briegel.conf).
+       Set by the main constructor/allocator of BriegelConf
+       (normally coming from the calling command classes)
+    */
+    public final static String SP_Global_ConfigFile = "@@global-config-file";
+
     /* The actual system-root path, where the current build will run.
        This variable is set by the SetupSysroot stage, based on target
        config and other considerations (eg. parallel builds may use

@@ -57,8 +57,7 @@ public class BriegelConf implements IConfig
 
     /* SP_xx means: system property -- always filled by the system, RO ! */
     private static final String SP_csdb_available_versions="@@csdb-available-versions";
-    private static final String SP_globalconf   = "@@global-config-file";
-    
+
     boolean processed_csdb_versions = false;
     boolean processed_db_world      = false;
     boolean processed_db_system     = false;
@@ -266,7 +265,7 @@ public class BriegelConf implements IConfig
 	throws EMisconfig
     {
 	return new BriegelConf(
-	    cf_get_str(SP_globalconf),
+	    cf_get_str(ConfigNames.SP_Global_ConfigFile),
 	    logger
 	);
     }
@@ -277,7 +276,7 @@ public class BriegelConf implements IConfig
 	throws EMisconfig
     {
 	return new BriegelConf(
-	    cf_get_str_mandatory(SP_globalconf),
+	    cf_get_str_mandatory(ConfigNames.SP_Global_ConfigFile),
 	    logger
 	);
     }
@@ -287,7 +286,7 @@ public class BriegelConf implements IConfig
 	throws EMisconfig
     {
 	return new BriegelConf(
-	    cf_get_str_mandatory(SP_globalconf),
+	    cf_get_str_mandatory(ConfigNames.SP_Global_ConfigFile),
 	    logger
 	);
     }
@@ -320,7 +319,7 @@ public class BriegelConf implements IConfig
 
 	thisconf.setPostprocessor(new postprocessor());
 	
-	thisconf.set(SP_globalconf, configfile);
+	thisconf.set(ConfigNames.SP_Global_ConfigFile, configfile);
 	debug("loading global config: "+configfile);
 
 	if (!__load_properties_sub(configfile))
