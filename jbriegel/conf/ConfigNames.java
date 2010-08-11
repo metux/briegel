@@ -25,6 +25,13 @@ public class ConfigNames
     public final static String SP_Version2    = "@@version2";
     public final static String SP_Version3    = "@@version3";
 
+    /* A unique tag for the current feature selection for the
+       current package. It does not necessarily contain the
+       feature's ID's, even if it currently does.
+       Set within the process-features stage in BriegelConf
+    */
+    public final static String SP_FeatureTag  = "@@feature-tag";
+
     /* The current package name.
        Set by the package loading code in BriegelConf
     */

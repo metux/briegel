@@ -57,7 +57,6 @@ public class BriegelConf implements IConfig
     private static final String cf_csdb_query_versions_url="csdb-query-versions-url";
 
     /* SP_xx means: system property -- always filled by the system, RO ! */
-    private static final String SP_feature_tag = "@@feature-tag";
     private static final String SP_db_world    = "@@world";
     private static final String SP_csdb_available_versions="@@csdb-available-versions";
     private static final String SP_globalconf   = "@@global-config-file";
@@ -795,7 +794,7 @@ public class BriegelConf implements IConfig
 	if (feature_tag.length()>0)
 	{
 	    notice("Feature-Tag: "+feature_tag);
-	    cf_add(SP_feature_tag,feature_tag);
+	    cf_add(ConfigNames.SP_FeatureTag,feature_tag);
 	}
 
 	if (missing!=null)
