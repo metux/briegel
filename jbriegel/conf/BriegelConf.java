@@ -61,7 +61,6 @@ public class BriegelConf implements IConfig
     private static final String SP_feature_tag = "@@feature-tag";
     private static final String SP_db_world    = "@@world";
     private static final String SP_csdb_available_versions="@@csdb-available-versions";
-    private static final String SP_package_name = "@@package-name";
     private static final String SP_globalconf   = "@@global-config-file";
     
     boolean processed_csdb_versions = false;
@@ -176,7 +175,7 @@ public class BriegelConf implements IConfig
 		return false;
 
 	cf_remove("@package");
-	cf_set(SP_package_name, pkgname);
+	cf_set(ConfigNames.SP_PackageName, pkgname);
 	
 	String dir    = cf_get_str_mandatory("package-db-dir");
 	String fn     = cf_get_str_mandatory("package-db-conf");
@@ -185,7 +184,7 @@ public class BriegelConf implements IConfig
 	
 	cf_set("@@package-db-conf", fn);
 	cf_set("@@package-db-dir", dir);
-	cf_set("@@package-name", pkgname);
+	cf_set(ConfigNames.SP_PackageName, pkgname);
 
 	/* NOTE: we have changed the load order of package.cf and 
 	   package-$version.cf, so we can define its name in package.cf
@@ -427,8 +426,8 @@ public class BriegelConf implements IConfig
 
 	process_version();
 
-	cf_set("[GLOBAL]@@package-name", "$(@@package-name)");
-	
+	cf_set("[GLOBAL]"+ConfigNames.SP_PackageName, "$("+ConfigNames.SP_PackageName+")");
+
 	String port_ver_fn = cf_get_str_mandatory("port-db-version-conf");
 	cf_set("@@port-db-version-conf", port_ver_fn);
 

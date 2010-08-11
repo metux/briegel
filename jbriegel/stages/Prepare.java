@@ -13,6 +13,7 @@ import org.de.metux.briegel.base.EPropertyInvalid;
 import org.de.metux.briegel.base.EPropertyMissing;
 
 import org.de.metux.briegel.conf.IConfig;
+import org.de.metux.briegel.conf.ConfigNames;
 
 public class Prepare extends Stage
 {
@@ -28,7 +29,7 @@ public class Prepare extends Stage
     {
 	/* -- add some global vars -- */
 	if (StrUtil.isEmpty(config.cf_get_str("source-buildroot")))
-	    config.cf_set("@@buildroot", "$(src_dir)/$(@@package-name)");
+	    config.cf_set("@@buildroot", "$(src_dir)/$("+ConfigNames.SP_PackageName+")");
 	else	
 	    config.cf_set("@@buildroot", "$(source-buildroot)");
 	config.cf_set("@@srcroot",   "$(@@buildroot)/$(@@srctree)");
@@ -51,8 +52,8 @@ public class Prepare extends Stage
 
     String sourcetree_marker() throws EMisconfig
     {
-	return 
-	    config.getPropertyString("@@package-name")+":"+
+	return
+	    config.cf_get_str(ConfigNames.SP_PackageName)+":"+
 	    config.getPropertyString("source-package")+":"+
 	    config.getPropertyString("version")+":"+
 	    config.getPropertyString("patch-file")+":"+

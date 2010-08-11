@@ -16,6 +16,11 @@ public class ConfigNames
     */
     public final static String SP_PortName   = "@@port-name";
 
+    /* The current package name.
+       Set by the package loading code in BriegelConf
+    */
+    public final static String SP_PackageName = "@@package-name";
+
     /* The actual system-root path, where the current build will run.
        This variable is set by the SetupSysroot stage, based on target
        config and other considerations (eg. parallel builds may use
