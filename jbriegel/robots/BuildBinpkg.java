@@ -3,6 +3,7 @@ package org.de.metux.briegel.robots;
 
 import org.de.metux.util.rm;
 import org.de.metux.briegel.conf.IConfig;
+import org.de.metux.briegel.conf.ConfigNames;
 
 import org.de.metux.briegel.base.EMisconfig;
 import org.de.metux.briegel.base.EUnknownBuilder;
@@ -83,8 +84,8 @@ public class BuildBinpkg extends Stage
 	config.getPropertyString("system-install-root");
 	config.getPropertyString("system-meta-root");
 	
-	// set the right locations for installing dependencies 
-	config.cf_set("@@install-root", "$(system-install-root)");
+	// set the right locations for installing dependencies
+	config.cf_set(ConfigNames.SP_InstallRoot, "$(system-install-root)");
 	config.cf_set("@@meta-root",    "$(system-meta-root)");
 
 	InstallTree instree = new InstallTree(config,req);
@@ -104,8 +105,8 @@ public class BuildBinpkg extends Stage
 	    
 	rm.remove_recursive(instroot);
 	rm.remove_recursive(metaroot);
-	
-	config.cf_set("@@install-root", "$(packaging-install-root)");
+
+	config.cf_set(ConfigNames.SP_InstallRoot, "$(packaging-install-root)");
 	config.cf_set("@@meta-root",    "$(packaging-meta-root");
 		
 	IBuilderRun builder = get_builder();

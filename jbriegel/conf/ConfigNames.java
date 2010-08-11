@@ -65,4 +65,10 @@ public class ConfigNames
        of old-fashioned $(system-root) !
     */
     public final static String SP_SystemRoot = "@@system-root";
+
+    /* The path where packages will install themselves to (aka DESTDIR).
+       Set by the robots and used by builders and their styles
+       (ie. passed to the individual package's buildscripts)
+    */
+    public final static String SP_InstallRoot = "@@install-root";
 }

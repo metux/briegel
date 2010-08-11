@@ -119,8 +119,6 @@ public class Builder extends Stage implements IBuilderRun
 	config.cf_set(ConfigNames.SP_WorkingDir, "$(@@srcdir)/$(treebuild-subdir)");
 	current_working_dir = config.cf_get_str_mandatory(ConfigNames.SP_CurrentWorkingDir);
 
-    //@@install-root
-
 	try
 	{
 	    String oldwd = FileOps.getcwd();
@@ -138,8 +136,9 @@ public class Builder extends Stage implements IBuilderRun
 	{
 	    throw new EBriegelError(current_port_name,e);
 	}
-	
-	pkg.setProperty("@@install-root", config.cf_get_str("@@install-root"));
+
+	// pass the install-root (aka DESTDIR) directory to the TreeBuild instance */
+	pkg.setProperty("@@install-root", config.cf_get_str_mandatory(ConfigNames.SP_InstallRoot));
 
 	_cp_instdir("prefix");
 	_cp_instdir("bindir");

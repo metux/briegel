@@ -2,7 +2,7 @@
 package org.de.metux.briegel.robots;
 
 import org.de.metux.briegel.conf.IConfig;
-
+import org.de.metux.briegel.conf.ConfigNames;
 import org.de.metux.briegel.depend.Tracker;
 import org.de.metux.briegel.depend.NodeIterator;
 import org.de.metux.briegel.depend.InstallTracker;
@@ -36,15 +36,11 @@ public class InstallTree extends Stage
     public void install_pkg(IConfig cf)
 	throws EBriegelError
     {
-	String install_root = config.getPropertyString("@@install-root");
 	String meta_root    = config.getPropertyString("@@meta-root");
-
-	cf.cf_set("@@install-root", install_root);
 	cf.cf_set("@@meta-root",    meta_root);
 
 	/* copy pathes from parent to childs */
-	/* FIXME ! */
-	cf.cf_set("@@install-root",      config.getPropertyString("@@install-root"));
+	cf.cf_set(ConfigNames.SP_InstallRoot, config.cf_get_str_mandatory(ConfigNames.SP_InstallRoot));
 	cf.cf_set("@@meta-root",         config.getPropertyString("@@meta-root"));
 	cf.cf_set("system-install-root", config.getPropertyString("system-install-root"));
 	cf.cf_set("system-meta-root",    config.getPropertyString("system-meta-root"));	

@@ -88,11 +88,11 @@ public class InstallBinpkg extends Stage
 	String sys_meta_root    = config.getPropertyString("system-meta-root");
 	String pkg_install_root = config.getPropertyString("packaging-install-root");
 	String pkg_meta_root    = config.getPropertyString("packaging-meta-root");
-	String install_root     = config.getPropertyString("@@install-root");
+	String install_root     = config.cf_get_str_mandatory(ConfigNames.SP_InstallRoot);
 
 	debug("packaging-install-root="+pkg_install_root);
 	debug("system-install-root="+sys_install_root);
-	debug("@@install-root="+install_root);
+	debug(ConfigNames.SP_InstallRoot+"="+install_root);
 
 	if (pkg_meta_root.equals(sys_meta_root))
 	{
