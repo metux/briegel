@@ -63,7 +63,6 @@ public class BriegelConf implements IConfig
     private static final String SP_csdb_available_versions="@@csdb-available-versions";
     private static final String SP_package_name = "@@package-name";
     private static final String SP_globalconf   = "@@global-config-file";
-    protected static final String SP_workdir    = "@@workdir";
     
     boolean processed_csdb_versions = false;
     boolean processed_db_world      = false;

@@ -5,6 +5,7 @@ import org.de.metux.briegel.base.EPropertyMissing;
 import org.de.metux.briegel.base.EPropertyInvalid;
 import org.de.metux.briegel.base.EMisconfig;
 import org.de.metux.briegel.conf.IConfig;
+import org.de.metux.briegel.conf.ConfigNames;
 import org.de.metux.briegel.stages.Stage;
 
 //#
@@ -28,7 +29,7 @@ public class Preconfig extends Stage
 	    config.getPropertyString("gmake-build-workdir" 
 	));
 	
-	config.cf_set("@@workdir", "$(@@srcdir)/$(gmake-build-workdir)");
-	debug("workdir:   "+config.getPropertyString("@@workdir"));
+	config.cf_set(ConfigNames.SP_WorkingDir, "$(@@srcdir)/$(gmake-build-workdir)");
+	debug("workdir:   "+config.cf_get_str_mandatory(ConfigNames.SP_WorkingDir));
     }
 }

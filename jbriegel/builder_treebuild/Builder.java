@@ -2,6 +2,7 @@
 package org.de.metux.briegel.builder_treebuild;
 
 import org.de.metux.briegel.conf.IConfig;
+import org.de.metux.briegel.conf.ConfigNames;
 import org.de.metux.pi_build.main.TreeBuilder;
 import org.de.metux.pi_build.nodes.PackageNode;
 import org.de.metux.util.FileOps;
@@ -20,6 +21,7 @@ public class Builder extends Stage implements IBuilderRun
 {
     TreeBuilder treebuild;
     PackageNode pkg;
+    String      current_working_dir;
 
     class InstallStage extends Stage
     {
@@ -28,14 +30,13 @@ public class Builder extends Stage implements IBuilderRun
         {
 	    super("TREEBUILD-INSTALL", cf);
 	}
-    
+
 	public void run_stage() throws EMisconfig, EInstallFailed
 	{
-	    String workdir = config.getPropertyString(ConfigNames.SP_WorkingDir);
-	    notice("workdir is: "+workdir);
+	    notice("workdir is: "+current_working_dir);
 
 	    String oldwd = FileOps.getcwd();
-	    FileOps.chdir(config.getPropertyString("@@workdir"));
+	    FileOps.chdir(current_working_dir);
 	    pkg.run_Install();
 	    FileOps.chdir(oldwd);
     	}
@@ -51,11 +52,10 @@ public class Builder extends Stage implements IBuilderRun
     
 	public void run_stage() throws EMisconfig, EBuildFailed
 	{
-	    String workdir = config.getPropertyString("@@workdir");
-	    notice("workdir is: "+workdir);
+	    notice("workdir is: "+current_working_dir);
 
 	    String oldwd = FileOps.getcwd();
-	    FileOps.chdir(config.getPropertyString("@@workdir"));
+	    FileOps.chdir(current_working_dir);
 	    pkg.run_Autodep();
 
 	    try
@@ -82,7 +82,7 @@ public class Builder extends Stage implements IBuilderRun
 	    throws EPropertyInvalid, EPropertyMissing, EMissingDependency
 	{
 	    String oldwd = FileOps.getcwd();
-	    FileOps.chdir(config.getPropertyString("@@workdir"));
+	    FileOps.chdir(current_working_dir);
 	    try
 	    {
 		pkg.run_Configure();
@@ -116,14 +116,15 @@ public class Builder extends Stage implements IBuilderRun
 	notice("builder: treebuild/j v0.1" );
 
 	/* check if make rules for install/install-strip are defined */
-	config.cf_set("@@workdir", "$(@@srcdir)/$(treebuild-subdir)");
+	config.cf_set(ConfigNames.SP_WorkingDir, "$(@@srcdir)/$(treebuild-subdir)");
+	current_working_dir = config.cf_get_str_mandatory(ConfigNames.SP_CurrentWorkingDir);
 
     //@@install-root
 
 	try
 	{
 	    String oldwd = FileOps.getcwd();
-	    FileOps.chdir(config.getPropertyString("@@workdir"));
+	    FileOps.chdir(current_working_dir);
 
 	    /* load the actual builder stuff */
 	    treebuild = new TreeBuilder(

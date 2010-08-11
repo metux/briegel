@@ -5,6 +5,7 @@ import org.de.metux.briegel.base.EPropertyMissing;
 import org.de.metux.briegel.base.EPropertyInvalid;
 import org.de.metux.briegel.base.EMisconfig;
 import org.de.metux.briegel.conf.IConfig;
+import org.de.metux.briegel.conf.ConfigNames;
 import org.de.metux.briegel.stages.Stage;
 
 //#
@@ -25,9 +26,10 @@ public class Preconfig extends Stage
 
 	notice("we have to go into our own subdir: "+
 	    config.getPropertyString("autoconf-build-workdir"));
-	
-	config.cf_set("@@workdir", "$(@@srcdir)/$(autoconf-build-workdir)");
-	debug("workdir:   "+config.getPropertyString("@@workdir"));
+
+	config.cf_set(ConfigNames.SP_WorkingDir, "$(@@srcdir)/$(autoconf-build-workdir)");
+
+	debug("workdir:   "+config.cf_get_str(ConfigNames.SP_WorkingDir));
 	debug("srcdir:    "+config.getPropertyString("@@srcdir"));
 	debug("subdir:    "+config.getPropertyString("autoconf-build-workdir"));
     }

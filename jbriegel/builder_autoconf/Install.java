@@ -6,6 +6,7 @@ import org.de.metux.briegel.base.EPropertyInvalid;
 import org.de.metux.briegel.base.EInstallFailed;
 import org.de.metux.briegel.base.EMisconfig;
 import org.de.metux.briegel.conf.IConfig;
+import org.de.metux.briegel.conf.ConfigNames;
 import org.de.metux.briegel.stages.Stage;
 
 public class Install extends Stage
@@ -25,7 +26,7 @@ public class Install extends Stage
 
 	String rule = config.getPropertyString(par);
 
-	String workdir = config.getPropertyString("@@workdir");
+	String workdir = config.cf_get_str(ConfigNames.SP_WorkingDir);
 	String instpar = config.getPropertyString("autoconf-install-param");
 	String env     = config.getPropertyString("autoconf-env-install");
 	String mk      = config.getPropertyString("autoconf-makefile");

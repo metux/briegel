@@ -3,6 +3,12 @@ package org.de.metux.briegel.conf;
 
 public class ConfigNames
 {
+    /* Working director - that's where we actually run the build.
+       May be a subdir of @@srcdir.
+
+       This variable is set by the individual builders within
+       the preconfig stage
+    */
     public final static String SP_WorkingDir = "@@workdir";
 
     /* The name of the current port to build.

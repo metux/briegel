@@ -11,6 +11,7 @@ import org.de.metux.briegel.base.EPropertyMissing;
 import org.de.metux.briegel.base.EMisconfig;
 import org.de.metux.briegel.base.EBuildFailed;
 import org.de.metux.briegel.conf.IConfig;
+import org.de.metux.briegel.conf.ConfigNames;
 import org.de.metux.briegel.stages.Stage;
 import org.de.metux.briegel.stages.IBuilderRun;
 
@@ -24,7 +25,7 @@ public class Configure extends Stage
     
     public void run_stage() throws EMisconfig, EBuildFailed
     {
-	String workdir   = config.getPropertyString("@@workdir");
+	String workdir   = config.cf_get_str_mandatory(ConfigNames.SP_WorkingDir);
 	String conf_exec = config.getPropertyString("gmake-exec-configure", null);
 	String conf_env  = config.getPropertyString("gmake-env-configure", null);
 

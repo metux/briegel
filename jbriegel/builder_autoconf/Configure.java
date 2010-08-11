@@ -11,6 +11,7 @@ import org.de.metux.briegel.base.EConfigureFailed;
 import org.de.metux.briegel.base.EPropertyInvalid;
 import org.de.metux.briegel.base.EPropertyMissing;
 import org.de.metux.briegel.conf.IConfig;
+import org.de.metux.briegel.conf.ConfigNames;
 import java.io.File;
 
 public class Configure extends Stage
@@ -59,7 +60,7 @@ public class Configure extends Stage
 
     void run_configure() throws EMisconfig, EConfigureFailed
     {
-	String workdir = config.getPropertyString("@@workdir");
+	String workdir = config.cf_get_str(ConfigNames.SP_WorkingDir);
 	String cmd     = config.getPropertyString("autoconf-exec-configure");
 	String env     = config.getPropertyString("autoconf-env-configure");
 	String opts    = config.getPropertyString( "@@builder-autoconf-options" );
@@ -87,7 +88,7 @@ public class Configure extends Stage
 
     void fixup_makefile() throws EMisconfig
     {
-	String workdir = config.getPropertyString("@@workdir");
+	String workdir = config.cf_get_str(ConfigNames.SP_WorkingDir);
 
         // FIX for one of dozens autoshit bugs 
 	if (config.cf_get_boolean("autoconf-bugfix-touch-makefile",false))

@@ -5,6 +5,7 @@ import org.de.metux.util.StoreFile;
 import org.de.metux.util.StrUtil;
 import org.de.metux.briegel.stages.Stage;
 import org.de.metux.briegel.conf.IConfig;
+import org.de.metux.briegel.conf.ConfigNames;
 import org.de.metux.briegel.base.EPropertyMissing;
 import org.de.metux.briegel.base.EPropertyInvalid;
 import org.de.metux.briegel.base.EInstallFailed;
@@ -20,7 +21,7 @@ public class Install extends Stage
     
     public void run_stage() throws EMisconfig, EInstallFailed
     {
-	String workdir = config.getPropertyString("@@workdir");
+	String workdir = config.cf_get_str_mandatory(ConfigNames.SP_WorkingDir);
 	String env     = config.getPropertyString("gmake-env-install");
 	String fn      = workdir+"/BRIEGEL-cmd-install";
 	String cmd     = 
