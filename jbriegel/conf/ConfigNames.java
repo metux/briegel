@@ -44,6 +44,12 @@ public class ConfigNames
     */
     public final static String SP_BuildRoot   = "@@buildroot";
 
+    /* List of ports in "world" selection - these are the ports
+       which are built by the BuildAll robot.
+       Set by the config postprocessing stage in BriegelConf
+    */
+    public final static String SP_WorldSet    = "@@world";
+
     /* The actual system-root path, where the current build will run.
        This variable is set by the SetupSysroot stage, based on target
        config and other considerations (eg. parallel builds may use

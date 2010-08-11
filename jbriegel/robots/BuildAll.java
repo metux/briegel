@@ -3,6 +3,7 @@ package org.de.metux.briegel.robots;
 
 import java.io.File;
 import org.de.metux.briegel.conf.IConfig;
+import org.de.metux.briegel.conf.ConfigNames;
 import org.de.metux.briegel.stages.Stage;
 import org.de.metux.briegel.base.EPropertyMissing;
 import org.de.metux.briegel.base.EPropertyInvalid;
@@ -21,10 +22,8 @@ public class BuildAll extends Stage
     public void run_stage()
 	throws EBriegelError
     {
-	String fn = config.getPropertyString("world-file");
-	config.cf_load_content("@@world", new File(fn) );
-	String[] selection = cf_list("@@world");
-	
+	String[] selection = config.getWorldList();
+
 	for (int x=0; x<selection.length; x++)
 	{
 	    debug("building port recursive: "+selection[x]);

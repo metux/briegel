@@ -8,7 +8,6 @@ import java.net.MalformedURLException;
 import java.io.File;
 import java.io.IOException;
 
-import org.de.metux.util.LoadFile;
 import org.de.metux.util.Filename;
 
 import org.de.metux.util.UniqueNameList;
@@ -57,7 +56,6 @@ public class BriegelConf implements IConfig
     private static final String cf_csdb_query_versions_url="csdb-query-versions-url";
 
     /* SP_xx means: system property -- always filled by the system, RO ! */
-    private static final String SP_db_world    = "@@world";
     private static final String SP_csdb_available_versions="@@csdb-available-versions";
     private static final String SP_globalconf   = "@@global-config-file";
     
@@ -142,8 +140,8 @@ public class BriegelConf implements IConfig
 	    return false;
 
 	cf_load_content(
-	    SP_db_world,
-	    getPropertyString(cf_world_filename));
+	    ConfigNames.SP_WorldSet,
+	    cf_get_str(cf_world_filename));
 
 	processed_db_world = true;
 	return true;
@@ -447,9 +445,10 @@ public class BriegelConf implements IConfig
     }
 
     public String[] getWorldList()
-	throws EPropertyInvalid
+	throws EPropertyInvalid, EPropertyMissing
     {
-	return cf_get_list(SP_db_world);
+	process_world_db();
+	return cf_get_list(ConfigNames.SP_WorldSet);
     }
 
     public final void error ( String text )
