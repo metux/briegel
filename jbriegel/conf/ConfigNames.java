@@ -21,6 +21,13 @@ public class ConfigNames
     */
     public final static String SP_PackageName = "@@package-name";
 
+    /* The build root directory, where the tarball unpacking or
+       vcs checkout happens to. This doesn't already have to be
+       the actual source tree root, since it's usually sitting in
+       subdirectory w/ package name and version.
+    */
+    public final static String SP_BuildRoot   = "@@buildroot";
+
     /* The actual system-root path, where the current build will run.
        This variable is set by the SetupSysroot stage, based on target
        config and other considerations (eg. parallel builds may use

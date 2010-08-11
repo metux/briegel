@@ -18,7 +18,8 @@ import org.de.metux.briegel.conf.ConfigNames;
 public class Prepare extends Stage
 {
     protected String filename;
-    
+    private   String buildroot;
+
     public Prepare(IConfig cf)
 	throws EPropertyMissing, EPropertyInvalid
     {
@@ -28,12 +29,27 @@ public class Prepare extends Stage
     public void run_stage() throws EPrepareFailed, EMisconfig, EPropertyInvalid
     {
 	/* -- add some global vars -- */
-	if (StrUtil.isEmpty(config.cf_get_str("source-buildroot")))
-	    config.cf_set("@@buildroot", "$(src_dir)/$("+ConfigNames.SP_PackageName+")");
-	else	
-	    config.cf_set("@@buildroot", "$(source-buildroot)");
-	config.cf_set("@@srcroot",   "$(@@buildroot)/$(@@srctree)");
+	config.cf_set(ConfigNames.SP_BuildRoot, "$(source-buildroot)");
+	config.cf_set("@@srcroot",   "$("+ConfigNames.SP_BuildRoot+")/$(@@srctree)");
 	config.cf_set("@@srcdir",    "$(@@srcroot)/$(source-prefix)");
+
+	/* -- prepare the buildroot and do paranoia checks -- */
+	buildroot = config.cf_get_str(ConfigNames.SP_BuildRoot);
+	if (buildroot.length()<10)
+	    throw new EMisconfig("Sanity check failed: buildroot too short (<10)");
+
+	try
+	{
+	    buildroot = new File(buildroot).getCanonicalPath();
+	}
+	catch (IOException e)
+	{
+	    error("exception: "+e);
+	    throw new EPrepareFailed("cannot access buildroot: \""+buildroot+"\"");
+	}
+
+	if (buildroot.length()<10)
+	    throw new EMisconfig("Sanity check failed: normalized buildroot too short (<10)");
 
 	/* -- prepare the sourcetree -- */
 	prepare_sourcetree();
@@ -42,9 +58,9 @@ public class Prepare extends Stage
 	String [] init_dirs = cf_list("init-dirs");
 	for (int x=0; x<init_dirs.length; x++)
 	    mkdir(init_dirs[x]);
-	
+
 	debug("source-prefix:  "+config.getPropertyString("source-prefix",""));
-        debug("@@buildroot:    "+config.getPropertyString("@@buildroot"));
+	debug(ConfigNames.SP_BuildRoot+":    "+config.cf_get_str(ConfigNames.SP_BuildRoot));
 	debug("@@srcroot:      "+config.getPropertyString("@@srcroot"));
 	debug("@@srcdir:       "+config.getPropertyString("@@srcdir"));
 	debug("@@srctree:      "+config.getPropertyString("@@srctree"));
@@ -76,7 +92,6 @@ public class Prepare extends Stage
     
     void decompress_archive ( String source ) throws EMisconfig, EPrepareFailed
     {
-	String buildroot = config.getPropertyString("@@buildroot");
 	String archiver = config.getPropertyString("archiver","");
 	if (archiver.length()==0)
 	{
@@ -126,34 +141,9 @@ public class Prepare extends Stage
 
     void cleanup() throws EMisconfig
     {
-	String buildroot = config.getPropertyString("@@buildroot");
-	if (buildroot.length()<10)
-	    throw new EMisconfig("@@buildroot -> len < 10");
-	    
 	notice("cleaning up "+buildroot );
 	rm.remove_recursive(buildroot);
 	mkdir(buildroot);
-    }
-    
-    void paranoia_check() throws EMisconfig, EPrepareFailed
-    {
-	/* check for proper buildroot variable ... probably not really necessary */
-	String buildroot = config.getPropertyString("@@buildroot");
-	try
-	{
-	    buildroot = new File(buildroot).getCanonicalPath();
-	}
-	catch (IOException e)
-	{
-	    error("exception: "+e);
-	    throw new EPrepareFailed ("cannot access buildroot");
-	}
-	
-	if (buildroot.length()<5)
-	    throw new EMisconfig("corrupt @@buildroot variable - internal problem ?");
-    
-	/* -- get the source file name / uri -- */
-	String source=config.getPropertyString("source-file");
     }
 
     void decompress() throws EMisconfig, EPrepareFailed
@@ -172,7 +162,6 @@ public class Prepare extends Stage
         
     void prepare_sourcetree() throws EMisconfig, EPrepareFailed
     {
-	paranoia_check();
 	preexec();
 	cleanup();
 	decompress();
@@ -183,8 +172,6 @@ public class Prepare extends Stage
     /* right after decompression, we need to know our actual srcroot */
     void lookup_srcdir() throws EMisconfig, EPrepareFailed
     {
-	String buildroot = config.getPropertyString("@@buildroot");
-
 	File handle = new File(buildroot);
 	String sublist[] = handle.list();
 	
