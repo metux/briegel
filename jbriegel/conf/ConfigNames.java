@@ -4,6 +4,10 @@ package org.de.metux.briegel.conf;
 public class ConfigNames
 {
     public final static String SP_WorkingDir = "@@workdir";
+
+    /* The name of the current port to build.
+       It is set by the port loading code in BriegelConf
+    */
     public final static String SP_PortName   = "@@port-name";
 
     /* The actual system-root path, where the current build will run.

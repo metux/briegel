@@ -28,7 +28,8 @@ abstract public class Stage
     protected String name;
     protected IConfig config;
     protected ILogger logger;
-    protected String port_name;
+
+    protected String current_port_name;
 
     public Stage ( String my_name, IConfig my_config )
 	throws EPropertyMissing, EPropertyInvalid
@@ -42,7 +43,7 @@ abstract public class Stage
 	if (_id!=null)
 	    name = name+"{"+_id+"}";
 	
-	port_name = config.getPropertyString(ConfigNames.SP_PortName);
+	current_port_name = config.getPortName();
     }
 
     /* logging stuff */    

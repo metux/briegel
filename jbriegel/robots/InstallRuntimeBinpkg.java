@@ -5,6 +5,7 @@ import org.de.metux.briegel.base.EBriegelError;
 import org.de.metux.briegel.base.EPropertyInvalid;
 import org.de.metux.briegel.base.EPropertyMissing;
 import org.de.metux.briegel.conf.IConfig;
+import org.de.metux.briegel.conf.ConfigNames;
 import org.de.metux.briegel.stages.Stage;
 
 public class InstallRuntimeBinpkg extends Stage
@@ -26,7 +27,7 @@ public class InstallRuntimeBinpkg extends Stage
 	config.cf_set("system-install-root", 	"$(image-install-root)");
 	config.cf_set("system-meta-root",    	"$(image-meta-root)");
 	
-	String[] names = cf_list("@@port-name");
+	String[] names = cf_list(ConfigNames.SP_PortName);
 
 	debug(" ==> installing: "+names[0]);
 	

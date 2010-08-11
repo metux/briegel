@@ -31,7 +31,7 @@ public class Configure extends Stage
 	if (!exec_step("createconf", createconf))
 	{
 	    error("createconf command failed");
-	    throw new EConfigureFailed(config.getPropertyString("@@port-name"));
+	    throw new EConfigureFailed(current_port_name);
 	}
     }
     
@@ -67,7 +67,7 @@ public class Configure extends Stage
 	if (!mkdir(workdir))
 	{
 	    error("could not create working directory \""+workdir+"\"");
-	    throw new EConfigureFailed(config.getPropertyString("@@port-name"));
+	    throw new EConfigureFailed(current_port_name);
 	}
 
 	String cmdline = "cd "+workdir+" && "+env+" "+cmd+" "+opts;
@@ -81,7 +81,7 @@ public class Configure extends Stage
 	    workdir+"/BRIEGEL-cmd-configure"
 	)) {
 	    error("configure command failed");
-	    throw new EConfigureFailed(config.getPropertyString("@@port-name"));
+	    throw new EConfigureFailed(current_port_name);
 	}
     }
 

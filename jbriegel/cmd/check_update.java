@@ -35,7 +35,7 @@ public class check_update extends CommandBase
 
 	    if (!port.cf_get_boolean(BriegelConf.k_csdb_query_versions,false))
 		System.err.println("# "+
-		    port.cf_get_str("@@port-name")+" not connected to CSDB");
+		    port.getPortName()+" not connected to CSDB");
 
 	    VersionStack stk = port.getNewerVersions();
 	    if (stk.size()>0)

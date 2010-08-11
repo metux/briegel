@@ -31,6 +31,6 @@ public class Install extends Stage
 	    throw new EInstallFailed("could not store cmd file: "+fn);
 	    
 	if (!exec(fn))
-	    throw new EInstallFailed(config.getPropertyString("@@port-name"));
+	    throw new EInstallFailed(current_port_name);
     }
 }

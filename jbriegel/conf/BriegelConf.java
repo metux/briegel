@@ -57,7 +57,6 @@ public class BriegelConf implements IConfig
     private static final String cf_csdb_query_versions_url="csdb-query-versions-url";
 
     /* SP_xx means: system property -- always filled by the system, RO ! */
-    private static final String SP_port_name   = "@@port-name";
     private static final String SP_version     = "@@version";
     private static final String SP_feature_tag = "@@feature-tag";
     private static final String SP_db_world    = "@@world";
@@ -419,7 +418,7 @@ public class BriegelConf implements IConfig
 	Depend dep = new Depend (port_ident);
 
 	/* actual port-loading stuff */
-    	cf_set(SP_port_name, dep.package_name );
+	cf_set(ConfigNames.SP_PortName, dep.package_name );
 	
 	/* load master port config */ 
 	String port_fn = cf_get_str_mandatory("port-db-conf");
@@ -446,7 +445,7 @@ public class BriegelConf implements IConfig
 	run_postprocess();
 	process_required_settings();
 
-	cf_set("@@id", "$(@@port-name)");
+	cf_set("@@id", "$("+ConfigNames.SP_PortName+")");
 
         return true;
     }
@@ -803,15 +802,13 @@ public class BriegelConf implements IConfig
 	}
 
 	if (missing!=null)
-	    throw new EMissingFeatureSwitch(
-		cf_get_str_mandatory(SP_port_name),
-		missing
-	    );
+	    throw new EMissingFeatureSwitch(getPortName(), missing);
     }
-    
+
+    /* retrieve the current port's name */
     public String getPortName()
 	throws EPropertyMissing, EPropertyInvalid
     {
-	return cf_get_str_mandatory(SP_port_name);
+	return cf_get_str_mandatory(ConfigNames.SP_PortName);
     }
 }

@@ -15,13 +15,11 @@ import org.de.metux.briegel.base.EMisconfig;
 import org.de.metux.briegel.base.EInstallFailed;
 import org.de.metux.briegel.base.EPropertyInvalid;
 import org.de.metux.briegel.base.EPropertyMissing;
-import org.de.metux.briegel.conf.ConfigNames;
 
 public class Builder extends Stage implements IBuilderRun
 {
     TreeBuilder treebuild;
     PackageNode pkg;
-    String port;
 
     class InstallStage extends Stage
     {
@@ -66,7 +64,7 @@ public class Builder extends Stage implements IBuilderRun
 	    }
 	    catch (Exception e)
 	    {
-		throw new EBuildFailed(port,e);
+		throw new EBuildFailed(current_port_name,e);
 	    }
 	    FileOps.chdir(oldwd);
 	}
@@ -91,7 +89,7 @@ public class Builder extends Stage implements IBuilderRun
 	        pkg.run_Autodep();
 	    } catch (metux.pi_build.base.EDependencyMissing e)
 	    {
-		throw new EMissingDependency(config.getPropertyString(ConfigNames.SP_PortName));
+		throw new EMissingDependency(current_port_name);
 	    }
 	    FileOps.chdir(oldwd);
 	}
@@ -116,7 +114,6 @@ public class Builder extends Stage implements IBuilderRun
     public void run_preconfig()	throws EBriegelError
     {
 	notice("builder: treebuild/j v0.1" );
-	port = config.getPropertyString("@@port-name");
 
 	/* check if make rules for install/install-strip are defined */
 	config.cf_set("@@workdir", "$(@@srcdir)/$(treebuild-subdir)");
@@ -138,7 +135,7 @@ public class Builder extends Stage implements IBuilderRun
 	} 
 	catch (Exception e)
 	{
-	    throw new EBriegelError(port,e);
+	    throw new EBriegelError(current_port_name,e);
 	}
 	
 	pkg.setProperty("@@install-root", config.cf_get_str("@@install-root"));

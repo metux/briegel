@@ -38,6 +38,6 @@ public class Install extends Stage
 	    workdir+"/BRIEGEL-log-install",
 	    workdir+"/BRIEGEL-cmd-install"
 	))
-	    throw new EInstallFailed(config.getPropertyString("@@port-name"));
+	    throw new EInstallFailed(current_port_name);
     }
 }
