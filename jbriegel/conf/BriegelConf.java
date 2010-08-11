@@ -57,7 +57,6 @@ public class BriegelConf implements IConfig
     private static final String cf_csdb_query_versions_url="csdb-query-versions-url";
 
     /* SP_xx means: system property -- always filled by the system, RO ! */
-    private static final String SP_version     = "@@version";
     private static final String SP_feature_tag = "@@feature-tag";
     private static final String SP_db_world    = "@@world";
     private static final String SP_csdb_available_versions="@@csdb-available-versions";
@@ -345,7 +344,7 @@ public class BriegelConf implements IConfig
     public Version getVersion()
 	throws EPropertyMissing, EPropertyInvalid
     {
-	return new Version(cf_get_str_mandatory(SP_version));
+	return new Version(cf_get_str_mandatory(ConfigNames.SP_Version));
     }
 
     private void process_version()
@@ -365,11 +364,11 @@ public class BriegelConf implements IConfig
 	try
 	{
 	    Version ver = new Version(version[0]);
-	    cf_set("@@version0", String.valueOf(ver.digits[0]));
-	    cf_set("@@version1", String.valueOf(ver.digits[1]));
-	    cf_set("@@version2", String.valueOf(ver.digits[2]));
-	    cf_set("@@version3", String.valueOf(ver.digits[3]));
-	    cf_set(SP_version, version[0]);
+	    cf_set(ConfigNames.SP_Version, version[0]);
+	    cf_set(ConfigNames.SP_Version0, String.valueOf(ver.digits[0]));
+	    cf_set(ConfigNames.SP_Version1, String.valueOf(ver.digits[1]));
+	    cf_set(ConfigNames.SP_Version2, String.valueOf(ver.digits[2]));
+	    cf_set(ConfigNames.SP_Version3, String.valueOf(ver.digits[3]));
 	}
 	catch (NumberFormatException e)
 	{

@@ -16,6 +16,15 @@ public class ConfigNames
     */
     public final static String SP_PortName   = "@@port-name";
 
+    /* The current package version.
+       Set by the port loading code in BriegelConf
+    */
+    public final static String SP_Version     = "@@version";
+    public final static String SP_Version0    = "@@version0";
+    public final static String SP_Version1    = "@@version1";
+    public final static String SP_Version2    = "@@version2";
+    public final static String SP_Version3    = "@@version3";
+
     /* The current package name.
        Set by the package loading code in BriegelConf
     */
