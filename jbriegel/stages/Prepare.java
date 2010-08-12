@@ -30,8 +30,8 @@ public class Prepare extends Stage
     {
 	/* -- add some global vars -- */
 	config.cf_set(ConfigNames.SP_BuildRoot, "$(source-buildroot)");
-	config.cf_set("@@srcroot",   "$("+ConfigNames.SP_BuildRoot+")/$("+ConfigNames.SP_SrcTree+")");
-	config.cf_set("@@srcdir",    "$(@@srcroot)/$(source-prefix)");
+	config.cf_set(ConfigNames.SP_SrcRoot,   "$("+ConfigNames.SP_BuildRoot+")/$("+ConfigNames.SP_SrcTree+")");
+	config.cf_set("@@srcdir",               "$("+ConfigNames.SP_SrcRoot+")/$(source-prefix)");
 
 	/* -- prepare the buildroot and do paranoia checks -- */
 	buildroot = config.cf_get_str(ConfigNames.SP_BuildRoot);
@@ -61,7 +61,7 @@ public class Prepare extends Stage
 
 	debug("source-prefix:  "+config.getPropertyString("source-prefix",""));
 	debug(ConfigNames.SP_BuildRoot+":    "+config.cf_get_str(ConfigNames.SP_BuildRoot));
-	debug("@@srcroot:      "+config.getPropertyString("@@srcroot"));
+	debug(ConfigNames.SP_SrcRoot+":      "+config.cf_get_str(ConfigNames.SP_SrcRoot));
 	debug("@@srcdir:       "+config.getPropertyString("@@srcdir"));
 	debug(ConfigNames.SP_SrcTree+":      "+config.cf_get_str(ConfigNames.SP_SrcTree));
     }
@@ -205,8 +205,8 @@ public class Prepare extends Stage
     {
 	String patches[]  = cf_list("prebuild-patch-file");
 	String patch_opts = config.getPropertyString("prebuild-patch-opts","");
-	String srcroot    = config.getPropertyString("@@srcroot");
-	
+	String srcroot    = config.cf_get_str_mandatory(ConfigNames.SP_SrcRoot);
+
 	for (int x=0; x<patches.length; x++)
 	{
 	    if (!(new File(patches[x]).exists()))

@@ -87,4 +87,12 @@ public class ConfigNames
        source tree (where Makefile+co are residing)
     */
     public final static String SP_SrcTree     = "@@srctree";
+
+    /* This is the actual root of the source tree, where everything
+       sits in. In most cases it's a subdirectory of @@buildroot,
+       since most source tarballs are packed w/ subdirs (eg. named
+       by packaga and version). It's also the directory where
+       patching happens into. Set by the prepare stage.
+    */
+    public final static String SP_SrcRoot     = "@@srcroot";
 }
