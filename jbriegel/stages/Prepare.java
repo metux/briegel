@@ -30,7 +30,7 @@ public class Prepare extends Stage
     {
 	/* -- add some global vars -- */
 	config.cf_set(ConfigNames.SP_BuildRoot, "$(source-buildroot)");
-	config.cf_set("@@srcroot",   "$("+ConfigNames.SP_BuildRoot+")/$(@@srctree)");
+	config.cf_set("@@srcroot",   "$("+ConfigNames.SP_BuildRoot+")/$("+ConfigNames.SP_SrcTree+")");
 	config.cf_set("@@srcdir",    "$(@@srcroot)/$(source-prefix)");
 
 	/* -- prepare the buildroot and do paranoia checks -- */
@@ -63,7 +63,7 @@ public class Prepare extends Stage
 	debug(ConfigNames.SP_BuildRoot+":    "+config.cf_get_str(ConfigNames.SP_BuildRoot));
 	debug("@@srcroot:      "+config.getPropertyString("@@srcroot"));
 	debug("@@srcdir:       "+config.getPropertyString("@@srcdir"));
-	debug("@@srctree:      "+config.getPropertyString("@@srctree"));
+	debug(ConfigNames.SP_SrcTree+":      "+config.cf_get_str(ConfigNames.SP_SrcTree));
     }
 
     String sourcetree_marker() throws EMisconfig
@@ -198,7 +198,7 @@ public class Prepare extends Stage
 	String srcroot = buildroot+"/"+sublist[0];
 	debug("srcroot is: "+srcroot);
 	
-	config.cf_set("@@srctree", sublist[0]);
+	config.cf_set(ConfigNames.SP_SrcTree, sublist[0]);
     }
     
     void apply_patches() throws EMisconfig, EPrepareFailed

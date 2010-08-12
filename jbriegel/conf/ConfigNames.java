@@ -79,4 +79,12 @@ public class ConfigNames
        Set by the robots and used by builds and their styles.
     */
     public final static String SP_MetaRoot    = "@@meta-root";
+
+    /* Most source tarballs are come with in an subdir within the
+       archive (eg. $package-$version/). This variable contains
+       the name of that subdir, detected in the prepare stage
+       (right after decompression), so we can find the actual
+       source tree (where Makefile+co are residing)
+    */
+    public final static String SP_SrcTree     = "@@srctree";
 }
