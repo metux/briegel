@@ -23,7 +23,7 @@ public class InstallRuntimeBinpkg extends Stage
 	config.getPropertyString("image-meta-root");
 
 	config.cf_set(ConfigNames.SP_InstallRoot, 	"$(image-install-root)");
-	config.cf_set("@@meta-root",    	"$(image-meta-root)");
+	config.cf_set(ConfigNames.SP_MetaRoot,		"$(image-meta-root)");
 	config.cf_set("system-install-root", 	"$(image-install-root)");
 	config.cf_set("system-meta-root",    	"$(image-meta-root)");
 	

@@ -25,8 +25,8 @@ public class CreateSystemImage extends Stage
 	config.getPropertyString("image-install-root");
 	config.getPropertyString("image-meta-root");
 	config.cf_set(ConfigNames.SP_InstallRoot, "$(image-install-root)");
-	config.cf_set("@@meta-root",    "$(image-meta-root)");
-	
+	config.cf_set(ConfigNames.SP_MetaRoot,    "$(image-meta-root)");
+
 	config.cf_load_content("@selection", 
 	    new File(config.getPropertyString("selection-file")));
 	String[] selection = cf_list("@selection");

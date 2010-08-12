@@ -71,4 +71,12 @@ public class ConfigNames
        (ie. passed to the individual package's buildscripts)
     */
     public final static String SP_InstallRoot = "@@install-root";
+
+    /* The path where package's (briegel-generated) metadata, eg.
+       config dump, file classifications, etc will be written to.
+       This data is useful for various postprocessings (QM-checks)
+       and binpkg generation.
+       Set by the robots and used by builds and their styles.
+    */
+    public final static String SP_MetaRoot    = "@@meta-root";
 }

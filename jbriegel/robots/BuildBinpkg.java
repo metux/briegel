@@ -86,7 +86,7 @@ public class BuildBinpkg extends Stage
 	
 	// set the right locations for installing dependencies
 	config.cf_set(ConfigNames.SP_InstallRoot, "$(system-install-root)");
-	config.cf_set("@@meta-root",    "$(system-meta-root)");
+	config.cf_set(ConfigNames.SP_MetaRoot,    "$(system-meta-root)");
 
 	InstallTree instree = new InstallTree(config,req);
 	instree.run();
@@ -107,8 +107,8 @@ public class BuildBinpkg extends Stage
 	rm.remove_recursive(metaroot);
 
 	config.cf_set(ConfigNames.SP_InstallRoot, "$(packaging-install-root)");
-	config.cf_set("@@meta-root",    "$(packaging-meta-root");
-		
+	config.cf_set(ConfigNames.SP_MetaRoot,    "$(packaging-meta-root");
+
 	IBuilderRun builder = get_builder();
 	builder.run_preconfig();
 	builder.run_configure();

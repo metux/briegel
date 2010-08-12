@@ -36,12 +36,9 @@ public class InstallTree extends Stage
     public void install_pkg(IConfig cf)
 	throws EBriegelError
     {
-	String meta_root    = config.getPropertyString("@@meta-root");
-	cf.cf_set("@@meta-root",    meta_root);
-
 	/* copy pathes from parent to childs */
 	cf.cf_set(ConfigNames.SP_InstallRoot, config.cf_get_str_mandatory(ConfigNames.SP_InstallRoot));
-	cf.cf_set("@@meta-root",         config.getPropertyString("@@meta-root"));
+	cf.cf_set(ConfigNames.SP_MetaRoot,    config.cf_get_str_mandatory(ConfigNames.SP_MetaRoot));
 	cf.cf_set("system-install-root", config.getPropertyString("system-install-root"));
 	cf.cf_set("system-meta-root",    config.getPropertyString("system-meta-root"));	
 	
