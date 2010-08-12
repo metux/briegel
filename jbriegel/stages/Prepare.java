@@ -66,16 +66,6 @@ public class Prepare extends Stage
 	debug(ConfigNames.SP_SrcTree+":      "+config.cf_get_str(ConfigNames.SP_SrcTree));
     }
 
-    String sourcetree_marker() throws EMisconfig
-    {
-	return
-	    config.cf_get_str(ConfigNames.SP_PackageName)+":"+
-	    config.getPropertyString("source-package")+":"+
-	    config.getPropertyString("version")+":"+
-	    config.getPropertyString("patch-file")+":"+
-	    config.getPropertyString("patch-file-name");
-    }
-
     String detect_archiver ( String filename )
     {
 	if (filename.endsWith(".tar.gz") || 
