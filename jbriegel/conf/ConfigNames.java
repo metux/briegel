@@ -95,4 +95,12 @@ public class ConfigNames
        patching happens into. Set by the prepare stage.
     */
     public final static String SP_SrcRoot     = "@@srcroot";
+
+    /* Sometimes packages unusally have their source tree - or at least
+       the build files - in some subdir (eg. if distinct ports in their
+       own subdirs). That's why we add an optional source-prefix and let
+       the builder run there, rather than directly in @@srcroot.
+       Set by prepare stage and used by builders and their styles.
+    */
+    public final static String SP_SrcDir      = "@@srcdir";
 }

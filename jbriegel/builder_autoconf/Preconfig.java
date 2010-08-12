@@ -27,10 +27,10 @@ public class Preconfig extends Stage
 	notice("we have to go into our own subdir: "+
 	    config.getPropertyString("autoconf-build-workdir"));
 
-	config.cf_set(ConfigNames.SP_WorkingDir, "$(@@srcdir)/$(autoconf-build-workdir)");
+	config.cf_set(ConfigNames.SP_WorkingDir, "$("+ConfigNames.SP_SrcDir+")/$(autoconf-build-workdir)");
 
 	debug("workdir:   "+config.cf_get_str(ConfigNames.SP_WorkingDir));
-	debug("srcdir:    "+config.getPropertyString("@@srcdir"));
+	debug("srcdir:    "+config.cf_get_str(ConfigNames.SP_SrcDir));
 	debug("subdir:    "+config.getPropertyString("autoconf-build-workdir"));
     }
 }

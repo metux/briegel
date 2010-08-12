@@ -29,7 +29,7 @@ public class Preconfig extends Stage
 	    config.getPropertyString("gmake-build-workdir" 
 	));
 	
-	config.cf_set(ConfigNames.SP_WorkingDir, "$(@@srcdir)/$(gmake-build-workdir)");
+	config.cf_set(ConfigNames.SP_WorkingDir, "$("+ConfigNames.SP_SrcDir+")/$(gmake-build-workdir)");
 	debug("workdir:   "+config.cf_get_str_mandatory(ConfigNames.SP_WorkingDir));
     }
 }

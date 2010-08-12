@@ -31,7 +31,7 @@ public class Prepare extends Stage
 	/* -- add some global vars -- */
 	config.cf_set(ConfigNames.SP_BuildRoot, "$(source-buildroot)");
 	config.cf_set(ConfigNames.SP_SrcRoot,   "$("+ConfigNames.SP_BuildRoot+")/$("+ConfigNames.SP_SrcTree+")");
-	config.cf_set("@@srcdir",               "$("+ConfigNames.SP_SrcRoot+")/$(source-prefix)");
+	config.cf_set(ConfigNames.SP_SrcDir,    "$("+ConfigNames.SP_SrcRoot+")/$(source-prefix)");
 
 	/* -- prepare the buildroot and do paranoia checks -- */
 	buildroot = config.cf_get_str(ConfigNames.SP_BuildRoot);
@@ -62,7 +62,7 @@ public class Prepare extends Stage
 	debug("source-prefix:  "+config.getPropertyString("source-prefix",""));
 	debug(ConfigNames.SP_BuildRoot+":    "+config.cf_get_str(ConfigNames.SP_BuildRoot));
 	debug(ConfigNames.SP_SrcRoot+":      "+config.cf_get_str(ConfigNames.SP_SrcRoot));
-	debug("@@srcdir:       "+config.getPropertyString("@@srcdir"));
+	debug(ConfigNames.SP_SrcDir+":       "+config.cf_get_str(ConfigNames.SP_SrcDir));
 	debug(ConfigNames.SP_SrcTree+":      "+config.cf_get_str(ConfigNames.SP_SrcTree));
     }
 

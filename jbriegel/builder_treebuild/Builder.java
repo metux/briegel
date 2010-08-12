@@ -116,7 +116,7 @@ public class Builder extends Stage implements IBuilderRun
 	notice("builder: treebuild/j v0.1" );
 
 	/* check if make rules for install/install-strip are defined */
-	config.cf_set(ConfigNames.SP_WorkingDir, "$(@@srcdir)/$(treebuild-subdir)");
+	config.cf_set(ConfigNames.SP_WorkingDir, "$("+ConfigNames.SP_SrcDir+")/$(treebuild-subdir)");
 	current_working_dir = config.cf_get_str_mandatory(ConfigNames.SP_CurrentWorkingDir);
 
 	try
