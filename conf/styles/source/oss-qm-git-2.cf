@@ -2,18 +2,23 @@
 # OSS-QM repository (version 2)
 #
 # This style is for packages in the new (05/2010) OSS-QM repository
-# layout, having separate per-package repositories.
+# layout, having separate per-package repositories. It now directly
+# fetches via git.
 #
 
 ## configurable properties
 oss-qm-vendor:				METUX
 oss-qm-pkg:				$(source-package)
 oss-qm-version:				$(source-version)
-oss-qm-urlprefix:			http://pubgit.metux.de/download/oss-qm/$(oss-qm-pkg)
 
-## these should not be overwritten
-source-format:				tar.bz2
-source-filename:			$(oss-qm-vendor).$(oss-qm-pkg)-$(oss-qm-version).$(source-format)
-source-file:				$(source-directory)/$(source-filename)
-fetch-source-url:			$(oss-qm-urlprefix)/$(source-filename)
+source-format:				git
 warn-missing-available-versions:	no
+
+git-command:				git
+git-source-cache:			$(@@ENV/HOME)/var/briegel/repo-cache.git
+git-source-prefix:			$(source-package)-$(@@version)
+git-source-repository:			git://pubgit.metux.de/oss-qm/$(oss-qm-pkg)
+git-source-ref:				refs/tags/$(oss-qm-vendor).$(oss-qm-pkg)-$(oss-qm-version)
+
+++require-setting:			source-version
+++require-setting:			source-package
