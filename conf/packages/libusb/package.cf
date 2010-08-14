@@ -1,0 +1,8 @@
+@style:			class/autotools-2
+@style:			source/vcs-git-1
+
+autoconf-build-workdir:	./
+feature-defvar:		_none
+
+git-source-repository:	git://git.libusb.org/libusb.git
+git-source-ref:		refs/tags/v$(@@version0).$(@@version1).$(@@version2)
