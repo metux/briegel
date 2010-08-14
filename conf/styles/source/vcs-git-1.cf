@@ -1,0 +1,12 @@
+#
+# Direct checkout from the Git VCS
+#
+
+source-format:				git
+warn-missing-available-versions:	no
+git-source-cache:			$(@@ENV/HOME)/var/briegel/repo-cache.git
+git-command:				git
+git-source-prefix:			$(source-package)-$(@@version)
+
+++require-setting:			source-package
+++require-setting:			source-version
