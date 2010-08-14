@@ -150,4 +150,9 @@ public class ConfigNames
        up @@system-root variable
     */
     public final static String SystemRoot_Directory   = "system-install-root";
+
+    /* Sysroot image tarball. Uncompressed into sysroot path in the
+       SetupSysroot stage
+    */
+    public final static String SystemRoot_Image       = "sysroot-image";
 }
