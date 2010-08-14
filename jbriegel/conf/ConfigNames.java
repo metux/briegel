@@ -144,4 +144,10 @@ public class ConfigNames
     /* Local cache repository to use by Prepare stage. Set by the FetchSource
        stage */
     public final static String SP_Git_SourceLocalRepo = "@@git-source-local-repo";
+
+    /* Sysroot path. Set in the global configuration or target styles,
+       used by SetupSysroot stage to install the sysroot image and set
+       up @@system-root variable
+    */
+    public final static String SystemRoot_Directory   = "system-install-root";
 }

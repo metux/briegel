@@ -26,7 +26,7 @@ public class SetupSysroot extends Stage
     public void run_stage()
 	throws EMisconfig, ECannotSetupSysroot
     {
-	String sysroot = config.getPropertyString("system-root");
+	String sysroot = config.cf_get_str_mandatory(ConfigNames.SystemRoot_Directory);
 	String image   = config.getPropertyString("sysroot-image");
 
 	config.cf_set(ConfigNames.SP_SystemRoot, sysroot);
