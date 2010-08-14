@@ -19,6 +19,8 @@ public class Prepare extends Stage
 {
     protected String filename;
     private   String buildroot;
+    private   String git_local_ref;
+    private   String git_local_repo;
 
     public Prepare(IConfig cf)
 	throws EPropertyMissing, EPropertyInvalid
@@ -80,7 +82,8 @@ public class Prepare extends Stage
 	return null;
     }
     
-    void decompress_archive ( String source ) throws EMisconfig, EPrepareFailed
+    void decompress_archive ( String source )
+	throws EMisconfig, EPrepareFailed, EPropertyInvalid
     {
 	String archiver = config.getPropertyString("archiver","");
 	if (archiver.length()==0)
@@ -136,8 +139,33 @@ public class Prepare extends Stage
 	mkdir(buildroot);
     }
 
+    void git_checkout()
+	throws EPrepareFailed, EPropertyInvalid, EPropertyMissing
+    {
+	String git_command = config.cf_get_str_mandatory(ConfigNames.Git_Command);
+	String worktree    = buildroot+"/"+config.cf_get_str(ConfigNames.Git_SourcePrefix, "");
+
+	mkdir(worktree);
+
+	if (!exec(git_command+" --git-dir=\""+git_local_repo+"\" --work-tree=\""+
+	         worktree+"\" checkout -f "+git_local_ref))
+	    throw new EPrepareFailed("git checkout failed");
+    }
+
     void decompress() throws EMisconfig, EPrepareFailed
     {
+	git_local_ref  = config.cf_get_str(ConfigNames.SP_Git_SourceLocalRef,"");
+	git_local_repo = config.cf_get_str(ConfigNames.SP_Git_SourceLocalRepo, "");
+
+	notice("git_local_ref="+git_local_ref);
+	notice("git_local_repo="+git_local_repo);
+
+	if (git_local_ref.length()>1)
+	{
+	    git_checkout();
+	    return;
+	}
+
 	/* now run decompression */
 	String srclist[] =cf_list("source-file");
 	if (srclist.length==0)

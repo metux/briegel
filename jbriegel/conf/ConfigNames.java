@@ -103,4 +103,45 @@ public class ConfigNames
        Set by prepare stage and used by builders and their styles.
     */
     public final static String SP_SrcDir      = "@@srcdir";
+
+    /* Git source repository and ref name
+
+       If this property is set, fetch via git instead of web download.
+       The remote ref name and the cache repository name also must be set.
+    */
+
+    /* Git command to run: we dont hardcode it, so you can choose a different
+       one (eg. for using wrappers or if you have multiple installations)
+    */
+    public final static String Git_Command            = "git-command";
+
+    /* Git source cache: this is a big local repository, where all remote
+       refs are first pulled in (by the FetchSource stage). From here then
+       the checkouts will happen in Prepare stage.
+    */
+    public final static String Git_SourceCache        = "git-source-cache";
+
+    /* The package's original source repository. From here FetchSource stage
+       will retrieve the currnt source ref into the cache repository.
+    */
+    public final static String Git_SourceRepository   = "git-source-repository";
+
+    /* The package release's git ref (normally a version tag) for our source.
+       Used by FetchSource to prepare cache repo and FetchSource configuration.
+    */
+    public final static String Git_SourceRef          = "git-source-ref";
+
+    /* Prefix (under the @@buildroot) where Prepare stage will checkout into.
+       This is required to mimic the common tarball layout (see @@srcdir)
+    */
+    public final static String Git_SourcePrefix       = "git-source-prefix";
+
+    /* Local git ref within the cache repository, where Prepare stage will
+       actually check out from. Set by FetchSource stage.
+    */
+    public final static String SP_Git_SourceLocalRef  = "@@git-source-local-ref";
+
+    /* Local cache repository to use by Prepare stage. Set by the FetchSource
+       stage */
+    public final static String SP_Git_SourceLocalRepo = "@@git-source-local-repo";
 }
