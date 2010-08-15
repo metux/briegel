@@ -60,7 +60,6 @@ gmake-env-pathes:		SYSROOT=$(@@system-root) $(__gm_pathes_up) $(__gm_pathes_lo)
 
 gmake-param-toolchain:		$(build-toolchain-env)
 
-++require-setting:		source-version
 ++require-setting:		source-package
 ++require-setting:		package-install-prefix
 ++require-setting:		package-install-bindir
