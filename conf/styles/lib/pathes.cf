@@ -11,7 +11,7 @@
 port-identkey:			$(@@port-name)-$(@@version)$(@@feature-tag)$(pkg-build-tag)
 
 ## directories for packaging
-packaging-basedir:		$(@@ENV/HOME)/var/briegel/install-root/$(target-name)/$(port-identkey)/
+packaging-basedir:		$(@@ENV/HOME)/var/briegel/install-root/$(target-name)/$(@@port-name)-$(@@random-key)/
 packaging-install-root:		$(packaging-basedir)/ROOT/
 packaging-meta-root:		$(packaging-basedir)/META/
 
