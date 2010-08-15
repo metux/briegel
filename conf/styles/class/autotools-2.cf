@@ -47,7 +47,6 @@ autoconf-codegen-args:		--with-pic --enable-shared --disable-static
 install-strip:			yes
 
 ++require-setting:		version
-++require-setting:		source-package
 ++require-setting:		autotools-cmd-autoreconf
 
 autoconf-path-args-prefix:		--prefix=$(package-install-prefix)

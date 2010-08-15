@@ -48,7 +48,6 @@ autotools-cmd-autoreconf:	echo
 install-strip:			yes
 
 ++require-setting:		version
-++require-setting:		source-package
 ++require-setting:		autotools-cmd-autoreconf
 
 ++autoconf-path-args:		--prefix=$(package-install-prefix)
