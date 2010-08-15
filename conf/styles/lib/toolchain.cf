@@ -28,7 +28,6 @@ build-hosttool-ranlib:	$(build-hostct-prefix)ranlib
 build-toolchain-env:	EXTERNAL_LIBTOOL=$(build-tool-libtool) UNITOOL_QUERY_COMMAND=unitool-query-property UNITOOL_CONFIG=$(build-tool-unitool-cf) UNITOOL_CONF=$(build-tool-unitool-cf) SYSROOT=$(@@system-root) cross_compiling=yes CROSS_COMPILE=$(build-toolchain-prefix) CC=$(build-tool-cc) AR=$(build-tool-ar) AS=$(build-tool-as) LD=$(build-tool-ld) STRIP=$(build-tool-strip) OBJDUMP=$(build-tool-objdump) OBJCOPY=$(build-tool-objcopy) NM=$(build-tool-nm) RANLIB=$(build-tool-ranlib) CXX=$(build-tool-cxx) HOST_CC=$(build-hosttool-cc) HOST_CXX=$(build-hosttool-cxx) HOST_LD=$(build-hosttool-ld) HOST_AR=$(build-hosttool-ar) HOST_RANLIB=$(build-hosttool-ranlib)
 
 ## defaults for direct installation (briegel-quick-install)
-system-root:		$(system-install-root)
 system-install-root:	$(build-toolchain-root)/sys-root
 system-meta-db:		$(system-install-root)/usr/pkginfo/
 system-meta-root:	$(system-meta-db)/$(@@package-name)/
