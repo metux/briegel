@@ -3,6 +3,7 @@ package org.de.metux.briegel.conf;
 import java.util.Hashtable;
 import java.util.Enumeration;
 import java.util.Properties;
+import java.util.Random;
 import java.net.URL;
 import java.net.MalformedURLException;
 import java.io.File;
@@ -298,7 +299,38 @@ public class BriegelConf implements IConfig
 	cf.LoadPort(port);
 	return cf;
     }
-	    
+
+    private String __bytetohex(byte bytes[])
+    {
+	final char[] hexchars = {
+	    '0', '1', '2', '3', '4', '5',
+	    '6', '7', '8', '9', 'a', 'b',
+	    'c', 'd', 'e', 'f'
+	};
+
+	char[] c = new char[bytes.length*2];
+	for (int x=0; x<bytes.length; x++)
+	{
+	    int i = ((bytes[x] < 0) ? -bytes[x] : bytes[x]);
+	    c[x*2]   = hexchars[i >> 4];
+	    c[x*2+1] = hexchars[i & 0xf];
+	}
+
+	return new String(c);
+    }
+
+    /* add a random key */
+    private void __add_randomkey()
+    {
+	byte buffer[] = new byte[20];
+	Random rand = new Random();
+	rand.nextBytes(buffer);
+	String str = __bytetohex(buffer);
+
+	cf_set(ConfigNames.SP_RandomKey, str);
+	notice("Random key: "+str);
+    }
+
     public BriegelConf(String configfile, ILogger new_logger)
 	throws EMisconfig
     {
@@ -316,6 +348,8 @@ public class BriegelConf implements IConfig
 	    debug("Adding env variable "+key+"=\""+val+"\"");
 	    thisconf.set("@@ENV/"+key,val);
 	}
+
+	__add_randomkey();
 
 	thisconf.setPostprocessor(new postprocessor());
 	

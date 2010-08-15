@@ -104,6 +104,12 @@ public class ConfigNames
     */
     public final static String SP_SrcDir      = "@@srcdir";
 
+    /* A 20-byte hex random key which is different to each BriegelConf
+       instance, can eg. be used to separate out build and sysroot
+       directories,
+    */
+    public final static String SP_RandomKey   = "@@random-key";
+
     /* Git source repository and ref name
 
        If this property is set, fetch via git instead of web download.
