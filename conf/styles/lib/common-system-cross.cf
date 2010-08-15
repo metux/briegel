@@ -18,11 +18,7 @@ _sysdir:		$(_cfgdir)/targets/$(target-name)/
 sysroot-image:		$(build-toolchain-root)/sysroot.build.tar.bz2
 world-file:		$(_sysdir)/etc/briegel/world
 
-init-dirs:		$(@@install-root)
-init-dirs:		$(@@meta-root)
-init-dirs:		$(packaging-archive-dir)
 init-dirs:		$(pkg-init-dirs)
-init-dirs:		$(source-directory)
 init-dirs:		$(style-init-dirs)
 
 port-db-dir:			$(_sysdir)/ports/
