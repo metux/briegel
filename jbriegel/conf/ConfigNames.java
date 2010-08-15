@@ -155,4 +155,11 @@ public class ConfigNames
        SetupSysroot stage
     */
     public final static String SystemRoot_Image       = "sysroot-image";
+
+    /* Sysroot git repository and ref (optional). If set, the SetupSysroot
+       stage will checkout from there instead of uncompressing a tarball
+    */
+    public final static String SystemRoot_GitRepo     = "sysroot-git-repo";
+    public final static String SystemRoot_GitRef      = "sysroot-git-ref";
+    public final static String SystemRoot_GitCmd      = "sysroot-git-cmd";
 }
