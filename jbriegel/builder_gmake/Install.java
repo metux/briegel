@@ -23,15 +23,11 @@ public class Install extends Stage
     {
 	String workdir = config.cf_get_str_mandatory(ConfigNames.SP_WorkingDir);
 	String env     = config.getPropertyString("gmake-env-install");
-	String fn      = workdir+"/BRIEGEL-cmd-install";
 	String cmd     = 
 	    "cd "+workdir+" && "+env+" "+
 	    config.getPropertyString("gmake-exec-install");
 	
-	if (!StoreFile.store(fn, cmd, "ugo+rx"))
-	    throw new EInstallFailed("could not store cmd file: "+fn);
-	    
-	if (!exec(fn))
+	if (!exec_step("install", cmd))
 	    throw new EInstallFailed(current_port_name);
     }
 }

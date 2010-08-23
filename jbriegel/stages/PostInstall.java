@@ -32,11 +32,7 @@ public class PostInstall extends Stage
 	if (cmd.length()==0)
 	    return;
 
-	if (!exec(
-		"cd "+workdir+" && "+cmd,
-		workdir+"/BRIEGEL-log-postinstall",
-		workdir+"/BRIEGEL-cmd-postinstall"
-	))
+	if (!exec_step("postinstall", "cd "+workdir+" && "+cmd))
 	    throw new EPostInstallFailed(
 		config.getPropertyString(ConfigNames.SP_PortName));
     }

@@ -36,7 +36,7 @@ public class Configure extends Stage
 	    if (!StoreFile.store(workdir+"/BRIEGEL-cmd-configure", cmdline, "ugo+rx"))
 	    	throw new EBuildFailed("could not store cmd file: ");
 	
-	    if (!exec(cmdline))
+	    if (!exec_step("configure", cmdline))
 		throw new EBuildFailed("gmake step failed");
 	}
     }

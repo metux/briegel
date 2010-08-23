@@ -72,15 +72,9 @@ public class Configure extends Stage
 	}
 
 	String cmdline = "cd "+workdir+" && "+env+" "+cmd+" "+opts;
-	
-	if (!StoreFile.store(workdir+"/BRIEGEL-cmd-configure",cmdline,"ugo+rx"))
-	    throw new EConfigureFailed("could not store cmdfile");
 
-	if (!exec(
-	    cmdline+"; export retcode=$?; echo; exit $retcode",
-	    workdir+"/BRIEGEL-log-configure",
-	    workdir+"/BRIEGEL-cmd-configure"
-	)) {
+	if (!exec_step("configure", cmdline))
+	{
 	    error("configure command failed");
 	    throw new EConfigureFailed(current_port_name);
 	}
@@ -94,11 +88,7 @@ public class Configure extends Stage
 	if (config.cf_get_boolean("autoconf-bugfix-touch-makefile",false))
 	{
 	    debug("Fixing Makefile timestamp due autoshit tends to set them into the past ...");
-	    exec(
-		"cd "+workdir+" && touch `find -name Makefile`",
-		workdir+"/BRIEGEL-log-fixup-makefile",
-		workdir+"/BRIEGEL-cmd-fixup-makefile"
-	    );
+	    exec_step("fixup-makefile", "cd "+workdir+" && touch `find -name Makefile`");
 	}
     }    
     

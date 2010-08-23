@@ -30,10 +30,7 @@ public class Build extends Stage
 
 	String cmdline = "cd "+workdir+" && "+build_env+" "+build_exec;
 	
-	if (!StoreFile.store(workdir+"/BRIEGEL-cmd-build", cmdline, "ugo+rx"))
-	    throw new EBuildFailed("could not store cmd file: ");
-	
-	if (!exec(cmdline))
+	if (!exec_step("build", cmdline))
 	    throw new EBuildFailed("gmake step failed");
     }
 }

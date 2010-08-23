@@ -32,11 +32,7 @@ public class Build extends Stage
 
 	String cmdline = "cd "+workdir+" && "+env+" make -f "+makefile+" "+rule;
 	
-	if (!exec(
-	    cmdline+"; export retval=$? ; echo ; exit $retval",
-	    workdir+"/BRIEGEL-log-build",
-	    workdir+"/BRIEGEL-cmd-build"
-	))
+	if (!exec_step("build", cmdline))
 	    throw new EBuildFailed("make step failed");
     }
 }

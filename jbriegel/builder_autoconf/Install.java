@@ -31,14 +31,10 @@ public class Install extends Stage
 	String env     = config.getPropertyString("autoconf-env-install");
 	String mk      = config.getPropertyString("autoconf-makefile");
 
-	String cmdline = 
+	String cmdline =
 	    "cd "+workdir+" && "+env+" make -f "+mk+" "+rule+" "+instpar;
 
-	if (!exec(
-	    cmdline,
-	    workdir+"/BRIEGEL-log-install",
-	    workdir+"/BRIEGEL-cmd-install"
-	))
+	if (!exec_step("install", cmdline))
 	    throw new EInstallFailed(current_port_name);
     }
 }
