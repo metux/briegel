@@ -196,12 +196,29 @@ abstract public class Stage
 	}
     }
 
+    /* Make sure the parent directory of given pathame exists */
+    private void mk_parent_dir(String fn)
+    {
+	if (fn != null)
+	try
+	{
+	    new File(fn).getCanonicalFile().getParentFile().mkdirs();
+	}
+	catch (IOException e)
+	{
+	    error("Cannot create dir: "+e);
+	}
+    }
+
     public boolean exec(String cmdline, String logfile, String cmdfile)
     {
 	FileWriter logwriter;
 	
 	cmdline = StrReplace.replace("\n", " ",
 		  StrReplace.replace("\r", " ", cmdline));
+
+	mk_parent_dir(cmdfile);
+	mk_parent_dir(logfile);
 
 	if (cmdfile!=null)
 	    if (!StoreFile.store(cmdfile, cmdline, "ugo+rx"))
@@ -237,16 +254,10 @@ abstract public class Stage
 	    return false;
 	}
 
-	if (!StoreFile.store(workdir+"/BRIEGEL-cmd-"+step, cmdline,"ugo+rwx"))
-	{
-	    error("exec_step "+step+" storing cmdfile failed");
-	    return false;
-	}
-	
 	return exec(
 	    cmdline+" ; export retcode=$?; echo; exit $retcode",
-	    workdir+"/BRIEGEL-log-"+step,
-	    workdir+"/BRIEGEL-cmd-"+step
+	    config.cf_get_str_mandatory(ConfigNames.Stages_Logfile_Prefix)+step,
+	    config.cf_get_str_mandatory(ConfigNames.Stages_Cmdfile_Prefix)+step
 	);
     }
 

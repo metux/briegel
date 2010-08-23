@@ -43,3 +43,6 @@ image-meta-root:		$(@@ENV/HOME)/var/images.meta/$(target-name)/
 
 ## Mass-Buildtests
 massbuild-log-dir:		$(@@ENV/HOME)/var/briegel/logs/massbuild/$(target-name)/$(@@port-name)-$(@@version)/$(@@ENV/BRIEGEL_MASSBUILD_KEY)/
+
+stages-logfile-prefix:		$(@@workdir)/BRIEGEL-log-
+stages-cmdfile-prefix:		$(@@workdir)/BRIEGEL-cmd-

@@ -174,4 +174,9 @@ public class ConfigNames
     public final static String SystemRoot_GitRepo     = "sysroot-git-repo";
     public final static String SystemRoot_GitRef      = "sysroot-git-ref";
     public final static String SystemRoot_GitCmd      = "sysroot-git-cmd";
+
+    /* Prefixes for stage logfiles and cmdfiles. Used by Stage::exec_step()
+       and the a step name will be appendet */
+    public final static String Stages_Logfile_Prefix  = "stages-logfile-prefix";
+    public final static String Stages_Cmdfile_Prefix  = "stages-cmdfile-prefix";
 }
