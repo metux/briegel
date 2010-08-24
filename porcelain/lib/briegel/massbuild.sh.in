@@ -63,7 +63,7 @@ __briegel_massbuild_rec() {
 		    echo
 		    echo "Attached configuration and logfiles"
 		    echo
-		) | mutt -s "[autobriegel] build FAILED: ${package}-${version} @ ${target}" \
+		) | mutt -s "[autobriegel @ ${hn}] build FAILED: ${package}-${version} @ ${target}" \
 		    -a "${cf_testing}" `find ${logdir} -name "BRIEGEL-log-*"` "--" "${BRIEGEL_MASSBUILD_NOTIFY_FAILED}"
 	    fi
 	else
@@ -77,7 +77,7 @@ __briegel_massbuild_rec() {
 		    echo
 		    echo "Attached configuration and logfiles"
 		    echo
-		) | mutt -s "[autobriegel] build success: ${package}-${version} @ ${target}" \
+		) | mutt -s "[autobriegel @ ${hn}] build success: ${package}-${version} @ ${target}" \
 		    -a "${cf_testing}" `find ${builddir} -name "BRIEGEL-log-*"` "--" "${BRIEGEL_MASSBUILD_NOTIFY_SUCCESS}"
 	    fi
 	fi
