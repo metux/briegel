@@ -47,6 +47,8 @@ public interface IConfig
 	throws EMisconfig, EMissingPort, EMissingPackage;
     public boolean LoadPort(String port)
 	throws EMisconfig, EMissingPort, EMissingPackage;
+    public boolean LoadPackage(String port, String version)
+	throws EMisconfig, EMissingPort, EMissingPackage;
 
     public String[] cf_get_list(String name) throws EPropertyInvalid;
     

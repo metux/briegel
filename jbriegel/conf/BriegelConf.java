@@ -439,6 +439,17 @@ public class BriegelConf implements IConfig
 	}
     }
 
+    public boolean LoadPackage (String pkg, String version)
+	throws EPropertyMissing, EPropertyInvalid, EMissingFeatureDB, EMissingPackage, EMissingStyle, EMisconfig
+    {
+	cf_set(ConfigNames.MP_Package, pkg);
+	cf_set(ConfigNames.MP_Version, version);
+	process_version();
+	process_package();
+	load_feature_db();
+	return true;
+    }
+
     public boolean LoadPort ( String port_ident )
 	throws EMisconfig, EMissingPort
     {
