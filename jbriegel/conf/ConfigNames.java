@@ -3,6 +3,12 @@ package org.de.metux.briegel.conf;
 
 public class ConfigNames
 {
+    /* Magic declarations. Processed by BriegelConf loading */
+    public final static String MP_Package   = "@package";
+    public final static String MP_Port      = "@port";
+    public final static String MP_Style     = "@style";
+    public final static String MP_Version   = "@version";
+
     /* Working director - that's where we actually run the build.
        May be a subdir of @@srcdir.
 

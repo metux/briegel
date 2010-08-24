@@ -106,8 +106,8 @@ public class BriegelConf implements IConfig
 	
 	while (true)
 	{
-	    String style_list[] = cf_get_list("@style");
-	    cf_remove("@style");
+	    String style_list[] = cf_get_list(ConfigNames.MP_Style);
+	    cf_remove(ConfigNames.MP_Style);
 
 	    if (style_list.length==0)
 		break;
@@ -167,10 +167,10 @@ public class BriegelConf implements IConfig
     {
 	String pkgname;
 
-	if ((pkgname = cf_get_str_n("@package"))==null)
+	if ((pkgname = cf_get_str_n(ConfigNames.MP_Package))==null)
 		return false;
 
-	cf_remove("@package");
+	cf_remove(ConfigNames.MP_Package);
 	cf_set(ConfigNames.SP_PackageName, pkgname);
 	
 	String dir    = cf_get_str_mandatory("package-db-dir");
@@ -359,7 +359,7 @@ public class BriegelConf implements IConfig
 	if (!__load_properties_sub(configfile))
 	    throw new EMissingGlobalConf(configfile);
 
-	cf_add("@style", cf_get_str("preload-style"));
+	cf_add(ConfigNames.MP_Style, cf_get_str("preload-style"));
 	run_postprocess();
 	
     }
@@ -381,14 +381,14 @@ public class BriegelConf implements IConfig
 	throws EMisconfig
     {
 	/* process @version statement */
-	String version[] = cf_get_list("@version");
+	String version[] = cf_get_list(ConfigNames.MP_Version);
 	if (version.length==0)
-	    throw new EPropertyMissing("@version");
+	    throw new EPropertyMissing(ConfigNames.MP_Version);
 	if (version.length>1)
 	    throw new EMisconfig("more than one @version statement not allowed");
 
 	// fixme: we could do a parse test here
-	cf_remove("@version");
+	cf_remove(ConfigNames.MP_Version);
         notice("Got version: "+version[0]);
 	
 	try
