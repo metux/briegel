@@ -35,7 +35,7 @@ meta-buildconf-dump:		$(meta-prefix)buildconf.dump
 !!source-directory:		$(@@ENV/HOME)/var/briegel/tarballs/$(source-package)/
 !!source-version:		$(@@version)
 !!source-package:		$(@@package-name)
-!!source-buildroot:		$(@@ENV/HOME)/var/briegel/src/$(target-name)/$(@@port-name)-$(@@random-key)
+source-buildroot:		$(@@ENV/HOME)/var/briegel/src/$(target-name)/$(@@port-name)-$(@@random-key)
 
 ## Target image directories
 image-install-root:		$(@@ENV/HOME)/var/images/$(target-name)/
@@ -43,6 +43,8 @@ image-meta-root:		$(@@ENV/HOME)/var/images.meta/$(target-name)/
 
 ## Mass-Buildtests
 massbuild-log-dir:		$(@@ENV/HOME)/var/briegel/logs/massbuild/$(target-name)/$(@@port-name)-$(@@version)/$(@@ENV/BRIEGEL_MASSBUILD_KEY)/
+massbuild-packaging-basedir:	$(@@ENV/HOME)/var/briegel/install-root/massbuild/$(target-name)/$(@@port-name)-$(@@version)/$(@@ENV/BRIEGEL_MASSBUILD_KEY)/
+massbuild-source-buildroot:	$(@@ENV/HOME)/var/briegel/src/massbuild/$(target-name)/$(@@port-name)-$(@@version)/$(@@ENV/BRIEGEL_MASSBUILD_KEY)/
 
 stages-logfile-prefix:		$(@@workdir)/BRIEGEL-log-
 stages-cmdfile-prefix:		$(@@workdir)/BRIEGEL-cmd-
