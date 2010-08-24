@@ -18,7 +18,7 @@ import org.de.metux.briegel.base.EMissingPort;
 import org.de.metux.briegel.base.FBriegelLogger;
 
 import org.de.metux.briegel.conf.IConfig;
-import org.de.metux.briegel.conf.IConfig;
+import org.de.metux.briegel.conf.ConfigNames;
 import org.de.metux.briegel.conf.BriegelConf;
 
 
@@ -115,6 +115,26 @@ public abstract class CommandBase
 	catch (EMisconfig e)
 	{
 	    errexit("error loading port config for: "+name, exitcode_err_port_config, e);
+	}
+	return null;
+    }
+
+    public IConfig getPackageConfig(String name)
+    {
+	try
+	{
+	    IConfig cf;
+	    cf = getGlobalConfig();
+	    cf.LoadPackage(name, "0.0.0.0");
+	    return cf;
+	}
+	catch (EMissingPort e)
+	{
+	    errexit(" missing package: "+name, exitcode_err_missing_port, e);
+	}
+	catch (EMisconfig e)
+	{
+	    errexit("error loading package config for: "+name, exitcode_err_port_config, e);
 	}
 	return null;
     }

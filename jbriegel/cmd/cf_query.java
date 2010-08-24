@@ -41,7 +41,12 @@ public class cf_query extends CommandBase
 
 	for (int x=0; x<argv.length; x++)
 	{
-	    if (argv[x].equals("--debug"));
+	    if ((argv[x] == null) || (argv[x].equals("--debug")));
+	    else if (argv[x].equals("--package"))
+	    {
+		x++;
+		cf = getPackageConfig(argv[x]);
+	    }
 	    else if (argv[x].equals("--port"))
 	    {
 		x++;
