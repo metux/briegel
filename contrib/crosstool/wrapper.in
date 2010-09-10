@@ -8,7 +8,7 @@ if [ ! "$SYSROOT" ]; then
     exit 1
 fi
 
-CMDS_SYSROOT="gcc cc c++ g++ cpp"
+CMDS_SYSROOT="gcc cc c++ g++ cpp ld"
 CMDS_NOSYSROOT="objdump objcopy ar as nm populate ranlib readelf addr2line size strings strip gcov c++filt gprof"
 
 CMDS_SKIPPED="populate"
