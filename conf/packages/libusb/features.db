@@ -1,0 +1,8 @@
+feature:	timerfd
+on:		--enable-timerfd
+off:		--disable-timerfd
+--
+feature:	logging
+on:		--enable-log
+off:		--disable-log
+--
