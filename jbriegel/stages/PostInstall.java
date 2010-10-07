@@ -15,7 +15,7 @@ public class PostInstall extends Stage
     public PostInstall(IConfig cf)
 	throws EPropertyInvalid, EPropertyMissing
     {
-	super("AC-POSTINSTALL", cf);
+	super("POSTINSTALL", cf);
     }
 
     /* FIXME: not implemented yet */
