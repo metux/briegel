@@ -1,0 +1,16 @@
+
+feature-enable=platform/libs/static:		on
+feature-enable=platform/libs/shared:		on
+feature-enable=platform/os/largefile:		on
+feature-enable=platform/os/rpath:		on
+feature-enable=platform/os/mmap:		on
+feature-enable=platform/os/pic:			on
+feature-enable=platform/os/elf-visibility:	on
+feature-enable=platform/os/selinux:		off
+feature-enable=platform/os/largefile:		off
+
+feature-enable=debug/dtrace:			off
+feature-enable=debug/systemtap:			off
+
+target-platform:				linux
+target-userland:				gnu

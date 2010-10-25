@@ -1,0 +1,8 @@
+##
+## CPU-arch common: i686
+##
+
+feature-enable=platform/arch/x86/mmx:		on
+feature-enable=platform/arch/growing-stack:	off
+
+target-arch:					i686

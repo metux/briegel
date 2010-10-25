@@ -37,7 +37,7 @@ allow-missing-version-pkgconf:		off
 
 @style:					lib/pathes
 @style:					lib/toolchain
-@style:					hosttype/machine/$(target-kernel)-$(target-libc)-$(target-cputype)
+@style:					hosttype/$(target-kernel)-$(target-libc)-$(target-cputype)
 
 ++require-setting:			@@hosttype@@
 

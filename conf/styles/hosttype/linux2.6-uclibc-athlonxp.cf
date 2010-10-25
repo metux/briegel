@@ -1,0 +1,16 @@
+##
+## Target for cross-platform:
+##
+## OS/Kernel:	Linux 2.6
+## Base-System:	uclibc
+## Hardware:	Athlon XP
+##
+
+@style:			arch/x86/athlon-xp
+@style:			platform/linux-gnu-common
+
+target-libc:		uclibc
+target-vendor:		unknown
+target-key:		$(target-arch)-$(target-vendor)-$(target-platform)-$(target-userland)
+
+@@hosttype@@:		ok

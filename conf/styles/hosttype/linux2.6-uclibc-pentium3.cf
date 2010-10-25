@@ -1,0 +1,16 @@
+##
+## Target for cross-platform:
+##
+## OS/Kernel:	Linux 2.6
+## Base-System:	uclibc
+## Hardware:	Pentium3
+##
+
+@style:			arch/cpu/pentium3
+@style:			platform/linux-gnu-common
+
+target-libc:		uclibc
+target-vendor:		unknown
+target-key:		$(target-arch)-$(target-vendor)-$(target-platform)-$(target-userland)
+
+@@hosttype@@:		ok

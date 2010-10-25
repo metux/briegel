@@ -1,0 +1,16 @@
+##
+## Target for cross-platform:
+##
+## OS/Kernel:	Linux 2.6
+## Base-System:	eglibc 2.5
+## Hardware:	Pentium2
+##
+
+@style:			arch/x86/pentium2
+@style:			platform/linux-gnu-common
+
+target-libc:		eglibc2.5
+target-vendor:		unknown
+target-key:		$(target-arch)-$(target-vendor)-$(target-platform)-$(target-userland)
+
+@@hosttype@@:		ok

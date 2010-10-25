@@ -1,0 +1,16 @@
+##
+## Target for cross-platform:
+##
+## OS/Kernel:	Linux 2.6
+## Base-System:	glibc 2.10
+## Hardware:	PentiumIII
+##
+
+@style:			arch/x86/pentium3
+@style:			platform/linux-gnu-common
+
+target-libc:		glibc2.10
+target-vendor:		unknown
+target-key:		$(target-arch)-$(target-vendor)-$(target-platform)-$(target-userland)
+
+@@hosttype@@:		ok

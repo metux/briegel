@@ -1,0 +1,16 @@
+##
+## Target for cross-platform:
+##
+## OS/Kernel:	Linux 2.6
+## Base-System:	glibc 2.2
+## Hardware:	Athlon XP
+##
+
+@style:			arch/x86/athlon-xp
+@style:			platform/linux-gnu-common
+
+target-libc:		glibc2.2
+target-vendor:		unknown
+target-key:		$(target-arch)-$(target-vendor)-$(target-platform)-$(target-userland)
+
+@@hosttype@@:		ok

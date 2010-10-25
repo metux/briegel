@@ -1,0 +1,14 @@
+##
+## CPU-arch: Intel Pentium 2
+##
+
+@style:						arch/x86/i686-common
+
+feature-enable=platform/arch/x86/mmx2:		off
+feature-enable=platform/arch/x86/sse:		on
+feature-enable=platform/arch/x86/sse2:		off
+feature-enable=platform/arch/x86/simd:		off	# mmx+3dnow together ?
+feature-enable=platform/arch/x86/3dnow:		off
+feature-enable=platform/arch/x86/3dnowex:	off
+
+target-cputype:					pentium2
