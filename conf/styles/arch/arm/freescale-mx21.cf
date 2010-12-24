@@ -1,0 +1,7 @@
+##
+## CPU-arch: Freescale MX21
+##
+
+@style:						arch/arm/coretex-a8
+
+target-cputype:					freescale-mx21

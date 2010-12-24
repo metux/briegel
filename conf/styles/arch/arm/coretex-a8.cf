@@ -1,0 +1,8 @@
+##
+## CPU-arch: coretex_a8
+##
+
+feature-enable=platform/arch/x86/mmx:		off
+feature-enable=platform/arch/growing-stack:	off
+
+target-arch:					arm

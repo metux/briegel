@@ -1,0 +1,16 @@
+##
+## Target for cross-platform:
+##
+## OS/Kernel:	Linux 2.6
+## Base-System:	glibc
+## Hardware:	ARM coretex A8
+##
+
+@style:			arch/arm/freescale-mx21
+@style:			platform/linux-gnu-common
+
+target-libc:		glibc
+target-vendor:		unknown
+target-key:		$(target-arch)-$(target-vendor)-$(target-platform)-$(target-userland)
+
+@@hosttype@@:		ok
