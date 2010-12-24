@@ -4,5 +4,11 @@
 
 feature-enable=platform/arch/x86/mmx:		off
 feature-enable=platform/arch/growing-stack:	off
+feature-enable=platform/arch/x86/sse2:		off
+feature-enable=platform/arch/x86/3dnow:		off
+feature-enable=platform/arch/x86/3dnowex:	off
+feature-enable=platform/arch/x86/mmx2:		off
+feature-enable=platform/arch/x86/simd:		off
+feature-enable=platform/arch/x86/sse:		off
 
 target-arch:					arm
