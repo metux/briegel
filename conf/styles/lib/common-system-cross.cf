@@ -45,3 +45,15 @@ log-exec-stdout:			stdout
 log-exec-stderr:			stderr
 
 build-toolchain-root:			$(@@ENV/HOME)/x-tools/$(target-name)
+
+##
+## enforce target-type specific settings to be present
+##
+++require-setting:			feature-enable=platform/arch/x86/sse2
+++require-setting:			feature-enable=platform/arch/growing-stack
+++require-setting:			feature-enable=platform/arch/x86/3dnow
+++require-setting:			feature-enable=platform/arch/x86/3dnowex
+++require-setting:			feature-enable=platform/arch/x86/mmx
+++require-setting:			feature-enable=platform/arch/x86/mmx2
+++require-setting:			feature-enable=platform/arch/x86/simd
+++require-setting:			feature-enable=platform/arch/x86/sse
